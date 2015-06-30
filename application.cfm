@@ -4,15 +4,26 @@
 			   setclientcookies="yes"
 			   setdomaincookies="no"
 			   sessiontimeout="#CreateTimeSpan(0, 0, 120, 0)#">
-<cfset APPLICATION.dsn = "SIA">
-<!---cfset APPLICATION.dsn = "SIA_Test"--->
-<cfset APPLICATION.HostServer = "http://sia.library.ucla.edu">
-<!---<cfset APPLICATION.HostServer = "http://siadev.library.ucla.edu">--->
-<!---cfset APPLICATION.FileDirectory = "f:\Inetpub\wwwroot\mainlib\sia\files\"--->
-<cfset APPLICATION.FileDirectory = "E:\Inetpub\Production\sia\files\">
-<cfset APPLICATION.Path = "/">
-<!---cfset APPLICATION.FilePath = "/mainlib/sia/files/"--->
-<cfset APPLICATION.FilePath = "/files/">
+
+<!--- Use production DSN and other values only on unitproj, otherwise use test DSN --->
+<cfif FindNoCase("unitproj", CGI.SERVER_NAME) EQ 1>
+	<cfset APPLICATION.dsn = "SIA">
+	<cfset APPLICATION.HostServer = "http://sia.library.ucla.edu"> <!--- CAN WE GET THIS FROM CGI.SERVER_NAME? --->
+<cfelse>
+	<cfset APPLICATION.dsn = "SIA_Test">
+	<cfset APPLICATION.HostServer = "http://siadev.library.ucla.edu">
+</cfif>			   
+
+<!--- 
+    Not sure how this is used in the application.  I set FilePath = "files/" - relative to this Application.cfm, same directory.
+    FileDirectory then becomes the path-on-disk corresponding to FilePath.
+    2015-06-29 akohler.
+--->
+<cfset APPLICATION.FilePath = "files/">
+<cfset APPLICATION.FileDirectory = ExpandPath(APPLICATION.FilePath)>
+<!--- Not sure how APPLICATION.Path is used in the application, but should be the same for prod/test in Hostek environment --->
+<cfset APPLICATION.Path = "/"> <!--- CHANGE THIS FOR HOSTEK ???--->
+
 <cfset APPLICATION.legalDomains = "library.ucla.edu,law.ucla.edu,ucla.edu,english.ucla.edu">
 <cfset APPLICATION.nullCaption = "Unspecified">
 <cfset APPLICATION.dateFormat = "mm/dd/yy"> <!---"yyyy-mm-dd"--->
