@@ -1,0 +1,268 @@
+/*
+UCLA Blue
+RGB 83 R | 104 G | 149 B 
+Web 536895
+
+UCLA Gold
+RGB 254 R | 187 G | 54B 
+Web FFB300
+*/
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	background-color: #ffffff;
+	margin: 0 0 3em 0;
+}
+#liveArea {
+	margin: .5em;
+}
+.banner {
+	background-color:#536895;
+}
+h1 {
+	font-size: medium;
+	color: #536895;
+	margin: 0;
+	padding: 1em 0 .5em .3em;
+	line-height: 0;
+}
+h2 {
+	font-size: medium;
+	color: red;
+	margin: 0;
+	padding: 1em 0 .5em .3em;
+	line-height: 0;
+	font-weight: bold;
+}
+em.required {
+	font-size: medium;
+	color: red;
+	margin: 0;
+	padding: 1em 0 .5em .3em;
+	line-height: 0;
+	font-weight: bold;
+}
+form {
+	padding: 0;
+	margin: 0;
+}
+.form, .data, .copy {
+	margin: 0 0 0 0;
+	padding: 1em;
+	border-style: solid;
+	border-top-color: #666666;
+	border-right-color: #cccccc;
+	border-bottom-color: #cccccc;
+	border-left-color: #666666;
+	border-width: 1px;
+}
+.form p, .data p {
+	line-height: 1.3em;
+	margin: 0 0 1em .5em;
+}
+.form td {
+	font-size: 100%;
+	color: #000000;
+	padding: 0 1em .5em 0;
+}
+.data form {
+	padding: 0;
+	margin: 0;
+}
+td.fieldLabel {
+	text-align: right;
+	color: #666666;
+	padding: 0 .3em .3em .3em;
+}
+td.fieldValue {
+	text-align: left;
+	padding: 0 0 .2em 0;
+}
+.data th {
+	text-align: left;
+	line-height: 1em;
+	font-weight: bold;
+	padding: 0 .5em .3em .5em;
+}
+td.first {
+	line-height: 1.2em;
+	padding: 0 .5em .2em .5em;
+}
+
+td.rest {
+	line-height: 1.2em;
+	padding: 0 .5em .3em .5em;
+	border-top-style: solid;
+	border-top-color: #cccccc;
+	border-top-width: 1px;
+}
+tr.total {
+	font-weight: bold; 
+	background-color: #CCCCCC;
+}
+.formSectionTitle, .dataSectionTitle, .copySectionTitle {
+	position: relative;
+	top: .5em;
+	background-color: #ffffff;
+	font-size: 100%;
+	font-weight: bold;	
+	margin: 0 0 0 1em;	
+	padding: 0 .5em 0 .5em;
+}
+input.mainControl {
+	font-size: 100%;
+	margin: .5em 0 .5em 0;
+}
+input.subControl {
+	font-size: 80%;
+	margin: .5em 0 .5em 0;
+}
+.data ul {
+	margin: 0 0 0 1.3em;
+	list-style-type: square;
+}
+.form ul {
+	line-height: 1.3em;
+	margin: 0 0 1em 2em;
+	list-style-type: square;
+}
+.form li {
+	line-height: 1.3em;
+	margin: 0 0 .5em 0;
+}
+.table li {
+	line-height: 1.5em;
+	list-style-type: square;
+}
+textarea {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 100%;
+}
+input {
+	font-size: 100%;
+}
+td.navLink0, td.navLinkLog{
+	background-color:#cccccc;
+	padding:.3em; 
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-right-color: #666666;
+	border-bottom-color: #cccccc;
+	border-left-color: #ffffff;
+}
+td.navLink1{
+	background-color:#ffffff;
+	padding:.3em;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-right-color: #666666;
+	border-bottom-color: #ffffff;
+	border-left-color: #ffffff;
+}
+td.navSpace {
+	background-color: #536895;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	border-bottom-color: #ffffff;
+}
+.navLink0, .navLink1, .navLinkLog {
+	text-align:center;
+}
+.navLink0 a:link, .navLink0 a:visited {
+	font-size:100%;
+	font-weight:bold;
+	color:#333333;
+	text-decoration: none;
+}
+.navLink1 a:link, .navLink1 a:visited {
+	font-size:100%;
+	font-weight:bold;
+	color:#000000;
+	text-decoration: none;
+}
+.navLinkLog a:link, .navLinkLog a:visited {
+	font-size:100%;
+	font-weight:bold;
+	color:#cc0000;
+	text-decoration: none;
+}
+.navLink0 a:hover, .navLink1 a:hover, .navLinkLog a:hover, .navLinkLog a:hover {
+	color:#0000ff;
+	text-decoration: none;
+}
+.table {
+	margin: .5em 0 1em 0;
+}
+.table td {
+	padding: 2px;
+}
+a:link, a:visited {
+	color: #0000ff;
+}
+a:link.columnHeading, a:visited.columnHeading {
+	<!--color: #333333;-->
+	color: #0033ff;
+}
+a:hover.columnHeading {
+	color: #0000ff;
+}
+.alert {
+	font-size: 100%;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+/* calendar */
+.calendar td {
+	border-style: solid;
+	border-width: 1px;
+	font-size: smaller;
+}
+td.thisDay, td.anyDay, td.anyDaySession, td.thisDaySession {
+	border-style: solid;
+	border-top-color: #cccccc;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #cccccc;
+	border-width: 1px;
+}
+td.thisDay, td.thisDaySession {
+	background-color: #cccccc;
+}
+td.anyDaySession {
+	background-color: #ffffff;
+}
+a:link.anyDaySession, a:visited.anyDaySession, a:link.thisDaySession, a:visited.thisDaySession {
+	text-decoration: none;
+	font-weight: bold;
+	color: #cc0000;
+}
+a:link.thisDay, a:visited.thisDay {
+	text-decoration: none;
+	font-weight: bold;
+	color: #0000ff;
+}
+a:link.anyDay, a:visited.anyDay {
+	text-decoration: none;
+	font-weight: normal;
+	color: #0000ff;
+}
+a:hover.anyDay, a:hover.anyDaySession, a:hover.thisDaySession, {
+	color: #0000ff;
+}
+a:hover.thisDay {
+	color: #0000ff;
+}
+.error {
+	color: #cc0000;
+	font-weight: bold;
+}
+.formSectionTitleErr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	color: #cc0000;
+	margin: 0 0 .5em 0;
+}

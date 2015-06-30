@@ -1,0 +1,231 @@
+<cfinclude template="authenticateExe.cfm">
+<cfif not isDefined("FORM.Submit")>
+	<cfif isDefined("URL.ActID")>
+		<cfscript>
+			if (not isNumeric(URL.ActID))
+			{
+				up2snuff = 0;
+				em = "Invalid or missing parameters";
+			}
+			else
+			{
+				ActID = URL.ActID;
+				up2snuff = 1;
+			}
+		</cfscript>
+		<cfscript>
+			// initialize variables for uspGetActivity stored procedure
+			LibID = 0;
+			ActID = ActID;
+			ActTypID = 0;
+			DelModID = 0;
+			MatID = 0;
+			CntctID = 0;
+			DBRCID = 0;
+			UID = 0;
+			sDT = '';
+			eDT = '';
+			QuartID = 0;
+			Yr = 0;
+			FiscalY = 0;
+		</cfscript>
+		<cfinclude template="uspGetActivity.cfm">
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfinclude template="formSession.cfm">
+		</cfif>
+	</cfif>
+	<cfif (isDefined("FORM.addActSess") and FORM.addActSess neq "0") and isDefined("FORM.ActID")>
+		<cfscript>
+			ActID = FORM.ActID;
+			up2snuff = 1;
+		</cfscript>
+		<cfscript>
+			// initialize variables for uspGetActivity stored procedure
+			LibID = 0;
+			ActID = ActID;
+			ActTypID = 0;
+			DelModID = 0;
+			MatID = 0;
+			CntctID = 0;
+			DBRCID = 0;
+			UID = 0;
+			sDT = '';
+			eDT = '';
+			QuartID = 0;
+			Yr = 0;
+			FiscalY = 0;
+		</cfscript>
+		<cfinclude template="uspGetActivity.cfm">
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfinclude template="formSession.cfm">
+		</cfif>
+	<cfelseif (isDefined("FORM.addActSess") and FORM.addActSess neq "Add Session") and not isDefined("FORM.ActID")>
+		<cfscript>
+			up2snuff = 1;
+			// initialize variables for uspGetActivity stored procedure
+			LibID = 0;
+			ActID = ActID;
+			ActTypID = 0;
+			DelModID = 0;
+			MatID = 0;
+			CntctID = 0;
+			DBRCID = 0;
+			UID = 0;
+			sDT = '';
+			eDT = '';
+			QuartID = 0;
+			Yr = 0;
+			FiscalY = 0;
+		</cfscript>
+		<cfinclude template="uspGetActivity.cfm">
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfinclude template="formActivityList.cfm">
+		</cfif>
+	<cfelseif isDefined("FORM.addSess") or isDefined("URL.addSess")>
+		<cfscript>
+			up2snuff = 1;
+			// initialize variables for uspGetActivity stored procedure
+			LibID = 0;
+			ActID = 0;
+			ActTypID = 0;
+			DelModID = 0;
+			MatID = 0;
+			CntctID = 0;
+			DBRCID = 0;
+			UID = SESSION.UID;
+			sDT = '';
+			eDT = '';
+			QuartID = 0;
+			Yr = 0;
+			FiscalY = 0;
+		</cfscript>
+		<cfinclude template="uspGetActivity.cfm">
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfinclude template="formActivityList.cfm">
+		</cfif>
+	<cfelseif (isDefined("FORM.addActSess") and FORM.addActSess eq "Add Session") and not isDefined("FORM.ActID")>
+		<cfscript>
+			missingRequired = 1;
+			em = "You must select an intructional activity for the session.";
+			up2snuff = 1;
+			// initialize variables for uspGetActivity stored procedure
+			LibID = 0;
+			ActID = 0;
+			ActTypID = 0;
+			DelModID = 0;
+			MatID = 0;
+			CntctID = 0;
+			DBRCID = 0;
+			UID = SESSION.UID;
+			sDT = '';
+			eDT = '';
+			QuartID = 0;
+			Yr = 0;
+			FiscalY = 0;
+		</cfscript>
+		<cfinclude template="uspGetActivity.cfm">
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfinclude template="formActivityList.cfm">
+		</cfif>
+	<cfelseif isDefined("FORM.addActSess") and FORM.addActSess eq "0">
+		<cflocation url="activity.cfm?ActID=#SESSION.ActID#" addtoken="yes">
+<!--- this is the result of redirect from addNewActivity.cfm --->
+	<cfelse>
+		<cfinclude template="formAddSessionSwitch.cfm">
+	</cfif>
+<cfelseif isDefined("FORM.Submit")>
+	<cfscript>
+		// check required variables
+		if (not isDefined("FORM.ActID"))
+		{
+			up2snuff = 0;
+			em = "Invalid or missing parameters";
+		}
+		else
+		{
+			ActID = FORM.ActID;
+			up2snuff = 1;
+		}
+	</cfscript>
+	<cfif FORM.Submit eq "Cancel">
+		<cflocation url="activity.cfm?ActID=#ActID#" addtoken="no">
+	<cfelse>
+		<cfif not up2snuff>
+			<cfinclude template="incBegin.cfm">
+			<cfinclude template="incError.cfm">
+		<cfelse>
+			<cfscript>
+				up2snuff = 1;
+				// initialize variables for uspGetActivity stored procedure
+				LibID = 0;
+				ActID = ActID;
+				ActTypID = 0;
+				DelModID = 0;
+				MatID = 0;
+				CntctID = 0;
+				DBRCID = 0;
+				UID = 0;
+				sDT = '';
+				eDT = '';
+				QuartID = 0;
+				Yr = 0;
+				FiscalY = 0;
+			</cfscript>
+			<cfif isDefined("FORM.addActSess")>
+				<cfif FORM.addActSess neq "0">
+					<cfinclude template="uspGetActivity.cfm">
+					<cfif not up2snuff>
+						<cfinclude template="incBegin.cfm">
+						<cfinclude template="incError.cfm">
+					<cfelse>
+						<cfinclude template="formSession.cfm">
+					</cfif>
+				<cfelse>
+					<cflocation url="activity.cfm?ActID=#SESSION.ActID#" addtoken="yes">
+				</cfif>
+			<cfelse>
+				<cfinclude template="uspGetActivity.cfm">
+				<cfif not up2snuff>
+					<cfinclude template="incBegin.cfm">
+					<cfinclude template="incError.cfm">
+				<cfelse>
+					<cfinclude template="incCheckForm.cfm">
+					<cfif missingRequired>
+						<cfinclude template="formSession.cfm">
+					<cfelse>
+						<cfinclude template="incCheckDataFormat.cfm">
+						<cfif not up2snuff>
+							<cfinclude template="formSession.cfm">
+						<cfelse>
+							<cfinclude template="uspAddSession.cfm">
+							<cfif not up2snuff>
+								<cfinclude template="formSession.cfm">
+							<cfelse>
+								<cflocation url="session.cfm?SessID=#Sess.SessionID#" addtoken="no">
+							</cfif>
+						</cfif>
+					</cfif>
+				</cfif>
+			</cfif>
+		</cfif>
+	</cfif>
+<cfelse>
+	<cfinclude template="incBegin.cfm">
+	<cfinclude template="incError.cfm">
+</cfif>
+<cfinclude template="incEnd.cfm">

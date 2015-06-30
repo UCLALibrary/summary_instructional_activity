@@ -1,0 +1,95 @@
+CREATE FUNTION [dbo].[build_initiate] ( @InitiateList VARCHAR(50) )
+RETURNS VARCHAR(500) AS
+BEGIN
+	DECLARE @output VARCHAR(500), @temp VARCHAR(500)
+	
+	DECLARE initiate_cursor CURSOR FOR 
+		SELECT 
+			OutreachInitiate 
+		FROM 
+			dbo.OutreachInitiateLookup 
+		WHERE 
+			OutreachInitiateID IN 
+			( SELECT * FROM dbo.split_string(@InitiateList, ',') )
+	
+	OPEN initiate_cursor 
+	
+	FETCH NEXT FROM initiate_cursor
+	INTO @temp
+	
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @output = @output + ' ' + @temp
+		FETCH NEXT FROM initiate_cursor
+		INTO @temp
+	END	
+
+	CLOSE initiate_cursor
+	DEALLOCATE initiate_cursor
+
+	RETURN LTRIM(RTRIM(@output))
+END
+
+CREATE FUNTION [dbo].[build_method] ( @MethodList VARCHAR(50) )
+RETURNS VARCHAR(500) AS
+BEGIN
+	DECLARE @output VARCHAR(500), @temp VARCHAR(500)
+	
+	DECLARE method_cursor CURSOR FOR 
+		SELECT 
+			OutreachMethod 
+		FROM 
+			dbo.OutreachMethodLookup
+		WHERE 
+			OutreachMethodID IN 
+			( SELECT * FROM dbo.split_string(@MethodList, ',') )
+	
+	OPEN method_cursor 
+	
+	FETCH NEXT FROM method_cursor
+	INTO @temp
+	
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @output = @output + ' ' + @temp
+		FETCH NEXT FROM method_cursor
+		INTO @temp
+	END	
+
+	CLOSE method_cursor
+	DEALLOCATE method_cursor
+
+	RETURN LTRIM(RTRIM(@output))
+END
+
+CREATE FUNTION [dbo].[build_outcome] ( @OutcomeList VARCHAR(50) )
+RETURNS VARCHAR(500) AS
+BEGIN
+	DECLARE @output VARCHAR(500), @temp VARCHAR(500)
+	
+	DECLARE outcome_cursor CURSOR FOR 
+		SELECT 
+			OutreachOutcome
+		FROM 
+			dbo.OutreachOutcomeLookup
+		WHERE 
+			OutreachOutcomeID IN 
+			( SELECT * FROM dbo.split_string(@OutcomeList, ',') )
+	
+	OPEN outcome_cursor 
+	
+	FETCH NEXT FROM outcome_cursor
+	INTO @temp
+	
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @output = @output + ' ' + @temp
+		FETCH NEXT FROM outcome_cursor
+		INTO @temp
+	END	
+
+	CLOSE outcome_cursor
+	DEALLOCATE outcome_cursor
+
+	RETURN LTRIM(RTRIM(@output))
+END
