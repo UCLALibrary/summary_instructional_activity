@@ -22,6 +22,7 @@
 		LEFT JOIN dbo.DepartmentLookup dl ON o.DepartmentID = dl.DepartmentID
 		LEFT JOIN dbo.SessionContact sc on c.ContactID = sc.ContactID
 		LEFT JOIN dbo.Session s on sc.SessionID = s.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			(
@@ -63,6 +64,9 @@
 		</cfif>
 		<cfif FORM.CntctID neq 0>
 			AND lco.ContactID = #FORM.CntctID#
+		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
 		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND c.DepartmentID = #FORM.DepartmentID#

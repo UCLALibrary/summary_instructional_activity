@@ -10,7 +10,7 @@
 		<td class="first">No classrooms currently in the SIA Database</td>
 		</tr>
 	</table>
-	<cfif SESSION.UserLevelID lt 3 and ListContains("classrooms.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif SESSION.UserLevelID lt 3 and ListContains("classrooms.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 		<form action="addNewClassroom.cfm" method="post">
 		<input name="Add" type="submit" class="mainControl" value="Add Classroom">
 		</form>

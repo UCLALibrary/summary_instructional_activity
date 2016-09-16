@@ -126,7 +126,7 @@
 		</tr>
 	</cfoutput>
 	</table>
-	<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contact.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contact.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 		<cfoutput>
 		<form action="addNewOutreach.cfm" method="post">
 		<input name="CntctID" type="hidden" value="#Contact.ContactID#">

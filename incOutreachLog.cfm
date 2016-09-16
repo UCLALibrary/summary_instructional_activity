@@ -33,7 +33,7 @@
 								<td nowrap class="fieldLabel">Name:</td>
 								<td class="fieldValue">
 									<strong>
-										<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+										<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 											<a href="contact.cfm?CntctID=#Outreach.ContactID#">#Outreach.Contact#</a>
 										<cfelse>
 											#Outreach.Contact#
@@ -44,7 +44,7 @@
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Status:</td>
 								<td class="fieldValue">
-									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="outreach.cfm?StatID=#Outreach.ContactStatusID#">#Outreach.ContactStatus#</a>
 									<cfelse>
 										#Outreach.ContactStatus#
@@ -55,7 +55,7 @@
 								<td nowrap class="fieldLabel">Department:</td>
 								<td class="fieldValue">
 									<cfif Outreach.ContactDepartmentID neq "">
-										<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+										<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 											<a href="outreach.cfm?DeptID=#Outreach.ContactDepartmentID#">#Outreach.ContactDepartment#</a>
 										<cfelse>
 											#Outreach.ContactDepartment#
@@ -108,7 +108,7 @@
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Contacted by:</td>
 								<td class="fieldValue">
-									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="librarian.cfm?LibID=#Outreach.LibrarianID#">#Outreach.LibrarianLastName#</a>
 									<cfelse>
 										#Outreach.LibrarianLastName#
@@ -169,7 +169,7 @@
 								<td nowrap class="fieldLabel">Input on:</td>
 								<td class="fieldValue">
 									#DateFormat(Outreach.DBRCreatedDT, APPLICATION.dateFormat)# #TimeFormat(Outreach.DBRCreatedDT, APPLICATION.timeFormat)# by
-									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="librarian.cfm?LibID=#Outreach.DBRCreatorID#">#Outreach.DBRCreator#</a>
 									<cfelse>
 										#Outreach.DBRCreator#
@@ -180,7 +180,7 @@
 								<td nowrap class="fieldLabel">Last updated:</td>
 								<td class="fieldValue">
 									#DateFormat(Outreach.DBRUpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Outreach.DBRUpdatedDT, APPLICATION.timeFormat)# by
-									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="librarian.cfm?LibID=#Outreach.DBRUpdaterID#">#Outreach.DBRUpdater#</a>
 									<cfelse>
 										#Outreach.DBRUpdater#
@@ -192,7 +192,7 @@
 				</tr>
 			</table>
 			<cfif (SESSION.LibID eq Outreach.DBRCreatorID) and
-			      (not ListContains("infoSession.cfm,deleteSession.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))>
+			      (not ListContains("infoSession.cfm,deleteSession.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))>
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>

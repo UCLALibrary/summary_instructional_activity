@@ -85,10 +85,10 @@
 			<td align="right">#Tours.Sessions#</td>
 			<td align="right">#Tours.People#</td>
 			<cfif FORM.Duration>
-				<td align="right">#Tours.display_dur#</th>
+				<td align="right">#Tours.Duration#</th>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#Tours.display_prep#</th>
+				<td align="right">#Tours.PrepTime#</th>
 			</cfif>
 		</tr>
 		<cfif FORM.Feedback>
@@ -107,10 +107,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 </table>
@@ -169,10 +169,10 @@
 			<td align="right">#Lectures.Sessions#</td>
 			<td align="right">#Lectures.People#</td>
 			<cfif FORM.Duration>
-				<td align="right">#Lectures.display_dur#</th>
+				<td align="right">#Lectures.Duration#</th>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#Lectures.display_prep#</th>
+				<td align="right">#Lectures.PrepTime#</th>
 			</cfif>
 		</tr>
 		<cfif FORM.Feedback>
@@ -191,10 +191,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 </table>
@@ -253,10 +253,10 @@
 			<td align="right">#Classes.Sessions#</td>
 			<td align="right">#Classes.People#</td>
 			<cfif FORM.Duration>
-				<td align="right">#Classes.display_dur#</th>
+				<td align="right">#Classes.Duration#</th>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#Classes.display_prep#</th>
+				<td align="right">#Classes.PrepTime#</th>
 			</cfif>
 		</tr>
 		<cfif FORM.Feedback>
@@ -275,10 +275,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 </table>
@@ -337,10 +337,10 @@
 			<td align="right">#Credits.Sessions#</td>
 			<td align="right">#Credits.People#</td>
 			<cfif FORM.Duration>
-				<td align="right">#Credits.display_dur#</th>
+				<td align="right">#Credits.Duration#</th>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#Credits.display_prep#</th>
+				<td align="right">#Credits.PrepTime#</th>
 			</cfif>
 		</tr>
 		<cfif FORM.Feedback>
@@ -359,10 +359,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 </table>
@@ -384,7 +384,7 @@
 	<cfset feedSpan = colSpan - 1>
 </cfif>
 
-<h3>Small group consultation</h3>
+<!---h3>Small group consultation</h3>
 <table width="98%" border="1" cellspacing="1" cellpadding="1" summary="Small Group Consultations for Fiscal Year">
 	<tr style="color: white; background-color: black;">
 		<th scope="col" align="left">Quarter</th>
@@ -438,10 +438,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 </table>
@@ -449,7 +449,7 @@
 <cfset sessionGrand = sessionGrand + sessionCount>
 <cfset peopleGrand = peopleGrand + peopleCount>
 <cfset grandDur = grandDur + durCount>
-<cfset grandPrep = grandPrep + prepCount>
+<cfset grandPrep = grandPrep + prepCount--->
 
 <!-- Liaison -->
 <cfset colSpan = 6>
@@ -517,10 +517,10 @@
 		<td align="right"><cfoutput>#sessionCount#</cfoutput></td>
 		<td align="right"><cfoutput>#peopleCount#</cfoutput></td>
 		<cfif FORM.Duration>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+			<td align="right">#durCount#</td>
 		</cfif>
 		<cfif FORM.PrepTime>
-			<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+			<td align="right">#prepCount#</td>
 		</cfif>
 	</tr>
 
@@ -549,10 +549,10 @@
 			<td align="right">#sessionGrand#</td>
 			<td align="right">#peopleGrand#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandDur#></td>
+				<td align="right">#grandDur#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandPrep#></td>
+				<td align="right">#grandPrep#</td>
 			</cfif>
 		</tr>
 	</table>

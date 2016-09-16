@@ -69,7 +69,7 @@
 			</cfif>
 		</tr>
 	</table>
-	<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("materials.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ( "1,5" contains SESSION.UserLevelID )><!-- and ListContains("materials.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")-->
 		<form action="addNewMaterial.cfm" method="post">
 		<input type="submit" class="mainControl" value="Add New Material">
 		</form>
@@ -105,7 +105,7 @@
 		</tr>
 	</cfoutput>
 	</table>
-	<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("materials.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ( "1,5" contains SESSION.UserLevelID )><!-- and ListContains("materials.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")-->
 		<form action="addRemoveMaterial.cfm" method="post">
 		<input type="submit" class="mainControl" value="Add New Material">
 		</form>

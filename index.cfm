@@ -78,7 +78,16 @@
 				}
 			//-->
 		</script>
-	</head>
+                <script>
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                
+                  ga('create', 'UA-32672693-3', 'auto');
+                  ga('send', 'pageview');
+                </script>
+    	</head>
 	<body onLoad="JavaScript:sf();">
 		<div id = "top">
 			<img src="images/titleL.gif" alt="UCLA Library Summary of Instructional Activity Database" width="489" height="104" id="title">
@@ -226,6 +235,11 @@
 									</cfif>
 								</td>
 							</tr>
+<tr>
+<td colspan="2">
+<cfoutput>#APPLICATION.HostServer#</cfoutput>
+</td>
+</tr>
 							<tr>
 								<td align="right">User name</td>
 								<td>

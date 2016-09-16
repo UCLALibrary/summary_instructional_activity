@@ -473,7 +473,7 @@
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
-							<cfif ListContains("addNewOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+							<cfif ListContains("addNewOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 								<input name="CntctID" type="hidden" value="#CntctID#">
 							<cfelse>
 								<input name="OutID" type="hidden" value="#OutID#">
@@ -483,7 +483,7 @@
 							</form>
 						</td>
 						<td>
-							<cfif ListContains("addNewOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+							<cfif ListContains("addNewOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 								<form action="contact.cfm?CntctID=#CntctID#" method="post">
 							<cfelse>
 								<form action="outreach.cfm?OutID=#OutID#" method="post">

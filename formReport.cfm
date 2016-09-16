@@ -188,6 +188,17 @@
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td>
+							Department | Campus Unit | Group<br/>
+							<cfset Lookup = "Department">
+							<cfset Header = "">
+							<cfinclude template="uspGetLookup.cfm">
+							<select name="SessionDepartmentID" multiple size="10">
+								<cfloop query="Department">
+									<option value="#Department.DepartmentID#">#Department.Department#</option>
+								</cfloop>
+							</select>
+						</td>
+						<td>
 							Academic Departments and More<br>
 							<cfset Lookup = "Department">
 							<cfset Header = "-select-">
@@ -221,7 +232,6 @@
 								</cfloop>
 							</select>
 						</td>
-						<td>&nbsp;</td>
 						<!---td>
 							Affiliation<br>
 							<cfset Lookup = "Affiliation">

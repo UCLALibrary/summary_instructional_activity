@@ -47,7 +47,13 @@
 	<cfparam name="OutID" default="0">
 	<cfparam name="ClassID" default="0">
 	<cfparam name="ShowAll" default="0">
+	<cfoutput>
+	<cfset startDate = Now()> 
+	<!-- started fetch at #TimeFormat(startDate, "HH:nn:ss")# -->
 	<cfinclude template="uspGetSession.cfm">
+	<cfset endDate = Now()> 
+	<!-- started fetch at #TimeFormat(endDate, "HH:nn:ss")# -->
+	</cfoutput>
 </cfif>
 <cfif not up2snuff>
 	<cfinclude template="incBegin.cfm">
@@ -55,6 +61,8 @@
 <cfelse>
 	<cfset pageTitle = "Sessions">
 	<cfinclude template="incBegin.cfm">
+	<cftimer label= "session-fetch sql" type = "comment" > 
 	<cfinclude template="incSessions.cfm">
+	</cftimer>
 </cfif>
 <cfinclude template="incEnd.cfm">

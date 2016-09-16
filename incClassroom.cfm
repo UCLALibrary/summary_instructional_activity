@@ -72,7 +72,7 @@
 						<table border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Online calendar:</td>
-								<td class="fieldValue"><cfif Classroom.CalendarURL neq ""><cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="#Classroom.CalendarURL#" target="_blank">Available</a><cfelse>Available</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
+								<td class="fieldValue"><cfif Classroom.CalendarURL neq ""><cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="#Classroom.CalendarURL#" target="_blank">Available</a><cfelse>Available</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
 							</tr>
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Contact:</td>
@@ -80,7 +80,7 @@
 							</tr>
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Contact email:</td>
-								<td class="fieldValue"><cfif Classroom.Email neq ""><cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="mailto:#Classroom.Email#">#Classroom.Email#</a><cfelse>#Classroom.Email#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
+								<td class="fieldValue"><cfif Classroom.Email neq ""><cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="mailto:#Classroom.Email#">#Classroom.Email#</a><cfelse>#Classroom.Email#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
 							</tr>
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Contact telephone:</td>
@@ -96,17 +96,17 @@
 							</tr>
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Input on:</td>
-								<td class="fieldValue">#DateFormat(Classroom.CreatedDT, APPLICATION.dateFormat)# #TimeFormat(Classroom.CreatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="librarian.cfm?LibID=#Classroom.DBRCreatorID#">#Classroom.DBRCreator#</a><cfelse>#Classroom.DBRCreator#</cfif></td>
+								<td class="fieldValue">#DateFormat(Classroom.CreatedDT, APPLICATION.dateFormat)# #TimeFormat(Classroom.CreatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="librarian.cfm?LibID=#Classroom.DBRCreatorID#">#Classroom.DBRCreator#</a><cfelse>#Classroom.DBRCreator#</cfif></td>
 							</tr>
 							<tr valign="top">
 								<td nowrap class="fieldLabel">Last updated:</td>
-								<td class="fieldValue">#DateFormat(Classroom.UpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Classroom.UpdatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="librarian.cfm?LibID=#Classroom.DBRUpdaterID#">#Classroom.DBRUpdater#</a><cfelse>#Classroom.DBRUpdater#</cfif></td>
+								<td class="fieldValue">#DateFormat(Classroom.UpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Classroom.UpdatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="librarian.cfm?LibID=#Classroom.DBRUpdaterID#">#Classroom.DBRUpdater#</a><cfelse>#Classroom.DBRUpdater#</cfif></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
-			<cfif ( "1,5" contains SESSION.UserLevelID ) and not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+			<cfif ( "1,5" contains SESSION.UserLevelID ) and not ListContains("infoClassroom.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>

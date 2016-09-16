@@ -1,7 +1,7 @@
-<cfif not Find("createAccount.cfm", PATH_INFO)>
+<!---cfif not Find("createAccount.cfm", PATH_INFO)>
 	<cflocation url="index.cfm" addtoken="no">
 	<cfabort>
-</cfif>
+</cfif--->
 <cfscript>
 	Domain = Right(Email, Len(Email) - Find("@", Email));
 	if (ListValueCount(APPLICATION.legalDomains, Domain, ",") lt 1)

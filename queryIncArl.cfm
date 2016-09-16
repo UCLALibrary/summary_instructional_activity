@@ -1,6 +1,6 @@
 <cfquery name="Tours" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		Coalesce(s.GroupName, 'N/A') AS GroupName,
 		dbo.get_librarian_by_session(s.SessionID) AS Librarian,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
@@ -30,6 +30,7 @@
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = 1
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -85,6 +86,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -106,13 +110,13 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title,
-		s.GroupName
+		Title,
+		GroupName
 </cfquery>
 
 <cfquery name="Lectures" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		Coalesce(s.GroupName, 'N/A') AS GroupName,
 		dbo.get_librarian_by_session(s.SessionID) AS Librarian,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
@@ -146,6 +150,7 @@
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 		LEFT JOIN dbo.DepartmentLookup d ON s.DepartmentID = d.DepartmentID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = 2
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -201,6 +206,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -222,12 +230,12 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title
+		Title
 </cfquery>
 
 <cfquery name="Classes" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		dbo.get_librarian_by_session(s.SessionID) AS Librarian,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
 		dbo.get_presenters_by_session(s.SessionID) AS Presenters,
@@ -259,6 +267,7 @@
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 		LEFT JOIN dbo.DepartmentLookup d ON s.DepartmentID = d.DepartmentID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = 3
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -314,6 +323,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -335,12 +347,12 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title
+		Title
 </cfquery>
 
 <cfquery name="Credits" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		dbo.get_librarian_by_session(s.SessionID) AS Librarian,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
 		dbo.get_presenters_by_session(s.SessionID) AS Presenters,
@@ -372,6 +384,7 @@
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 		LEFT JOIN dbo.DepartmentLookup d ON s.DepartmentID = d.DepartmentID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = 4
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -427,6 +440,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -448,12 +464,12 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title
+		Title
 </cfquery>
 
-<cfquery name="Consults" datasource="#APPLICATION.dsn#">
+<!---cfquery name="Consults" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		dbo.get_librarian_by_session(s.SessionID) AS Librarian,
 		dbo.get_presenters_by_session(s.SessionID) AS CoLibs,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
@@ -483,8 +499,9 @@
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
-		a.ActivityTypeID = 5
+		a.ActivityTypeID IN (5,6,7,8,11)
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			AND
 			(
@@ -553,12 +570,12 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title
-</cfquery>
+		Title
+</cfquery--->
 
 <cfquery name="Liaison" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		Coalesce(s.GroupName, 'N/A') AS GroupName,
 		dbo.get_presenters_by_session(s.SessionID) AS CoLibs,
 		dbo.get_developers_by_session(a.ActivityID) AS Developers,
@@ -586,8 +603,9 @@
 		LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 		LEFT JOIN dbo.QuarterLookup ql ON s.QuarterID = ql.QuarterID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
-		(a.ActivityTypeID = 6 OR a.ActivityTypeID = 7 OR a.ActivityTypeID = 8)
+		(a.ActivityTypeID = 6 OR a.ActivityTypeID = 7 OR a.ActivityTypeID = 8 OR a.ActivityTypeID = 11)
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			AND
 			(
@@ -635,6 +653,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -659,6 +680,6 @@
 		</cfif>
 	ORDER BY
 		Quarter,
-		a.Title,
+		Title,
 		GroupName
 </cfquery>

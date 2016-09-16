@@ -1,6 +1,7 @@
 <cfquery name="Sessions" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
+		cast(a.Description AS varchar(max)) AS Description,
 		s.QuarterID,
 		Coalesce(ql.Quarter, '&nbsp;') AS Quarter,
 		s.SessionDateTime,
@@ -30,11 +31,12 @@
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
-		<cfif type neq 8>
+		<cfif type neq 11>
 			a.ActivityTypeID = #type#
 		<cfelse>
-			a.ActivityTypeID IN (6,7,8)
+			a.ActivityTypeID IN (5,6,7,8,11)
 		</cfif>
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			AND
@@ -82,6 +84,9 @@
 		</cfif>
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
+		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
 		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#

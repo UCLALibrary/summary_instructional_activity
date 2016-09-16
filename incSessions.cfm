@@ -129,7 +129,7 @@
 		</table>
 		<cfoutput>
 			<cfif "1,5" contains SESSION.UserLevelID
-			      and not ListContains("contact.cfm,department.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")> <!---mySIA.cfm,--->
+			      and not ListContains("contact.cfm,department.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")> <!---mySIA.cfm,--->
 				<form action="addSession.cfm" method="post">
 					<input name="caller" type="hidden" value="start">
 					<input name="Submit" type="submit" class="mainControl" value="Add Session">
@@ -153,7 +153,7 @@
 	<div class="data">
 		<cfoutput>
 			<cfif "1,5" contains SESSION.UserLevelID
-			      and not ListContains("contact.cfm,department.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><!---mySIA.cfm,--->
+			      and not ListContains("contact.cfm,department.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><!---mySIA.cfm,--->
 				<form action="addSession.cfm" method="post">
 					<input name="caller" type="hidden" value="start">
 					<input name="Submit" type="submit" class="mainControl" value="Add Session">
@@ -198,16 +198,20 @@
 						</cfif>
 					</cfif>
 					<cfif not Find("mySIA", SCRIPT_NAME)>
-						<cfif not ListContains("contact.cfm,classroom.cfm,infoClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and DeptID eq 0>
-							<th nowrap><a href="#sortURL#fld=sp&ord=#ord#" class="columnHeading">Department</a></th>
+						<cfif not ListContains("contact.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and DeptID eq 0>
+							<th nowrap><a href="#sortURL#fld=sp&ord=#ord#" class="columnHeading">Learner Academic Departments</a></th>
 						</cfif>
-						<cfif ListContains("activity.cfm,session.cfm,classroom.cfm,infoClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") or LibID eq 0>
+						<cfif ListContains("activity.cfm,session.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") or LibID eq 0>
 							<th nowrap><a href="#sortURL#fld=sl&ord=#ord#" class="columnHeading">Librarian(s)</a></th>
 							<th nowrap><a href="#sortURL#fld=su&ord=#ord#" class="columnHeading">Unit</a></th>
 						</cfif>
 					</cfif>
 				</cfoutput>
 			</tr>
+			<cfoutput>
+			  <cfset startDate = Now()> 
+			  <!-- started output at #TimeFormat(startDate, "HH:nn:ss")# -->
+			</cfoutput>
 			<cfoutput query="Sess" group="SessionID">
 				<cfset class="#IIF(Sess.CurrentRow eq 1, DE('first'), DE('rest'))#">
 				<cfscript>
@@ -227,7 +231,15 @@
 								( ( ( SESSION.UserLevelID eq 1 ) and ( ListContains(EditorID, SESSION.LibID, ",") ) ) or
 								  ( ( SESSION.UserLevelID eq 2 ) and ( Sess.UnitID eq SESSION.UID ) ) or
 								  ( SESSION.UserLevelID gte 3 ) )>
-								<a href="session.cfm?SessID=#Sess.SessionID#&ActID=#Sess.ActivityID#">#Sess.Title#</a>
+								<a href="session.cfm?SessID=#Sess.SessionID#&ActID=#Sess.ActivityID#">
+									<cfif Sess.SessDeptTitle neq "">
+										#Sess.SessDeptTitle#
+										<cfif Sess.CourseNumber neq "">
+											(#Sess.CourseNumber#&nbsp;#Sess.CourseSection#)
+										</cfif>
+									<cfelse>#Sess.Title#
+									</cfif>
+								</a>
 							<cfelse>
 								#Sess.Title#
 							</cfif>
@@ -337,7 +349,7 @@
 						</cfif>
 					</cfif>
 					<cfif not Find("mySIA", SCRIPT_NAME)>
-						<cfif not ListContains("contact.cfm,classroom.cfm,infoClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and DeptID eq 0>
+						<cfif not ListContains("contact.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and DeptID eq 0>
 							<td class="#class#">
 								<cfif Sess.SessionDepartment neq "">
 									<a href="department.cfm?DeptID=#Sess.SessionDepartmentID#">#Sess.SessionDepartment#</a>
@@ -346,7 +358,7 @@
 								</cfif>
 							</td>
 						</cfif>
-						<cfif ListContains("activity.cfm,session.cfm,classroom.cfm,infoClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") or LibID eq 0>
+						<cfif ListContains("activity.cfm,session.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") or LibID eq 0>
 							<td class="#class#">
 								<cfoutput>
 									<cfif not Find("infoClassroom.cfm", SCRIPT_NAME)>
@@ -371,10 +383,14 @@
 					</cfif>
 				</tr>
 			</cfoutput>
+        	<cfoutput>
+            	<cfset endDate = Now()> 
+            	<!-- ended output at #TimeFormat(endDate, "HH:nn:ss")# -->
+        	</cfoutput>
 		</table>
 		<cfoutput>
 			<cfif "1,5" contains SESSION.UserLevelID
-			      and not ListContains("mySIA.cfm,contact.cfm,department.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+			      and not ListContains("mySIA.cfm,contact.cfm,department.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 				<form action="addSession.cfm" method="post">
 					<input name="caller" type="hidden" value="start">
 					<input name="Submit" type="submit" class="mainControl" value="Add Session">

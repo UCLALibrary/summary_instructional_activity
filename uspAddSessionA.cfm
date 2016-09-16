@@ -10,21 +10,12 @@
 <cftry>
 	<cfstoredproc procedure="uspAddActivity" datasource="#APPLICATION.dsn#">
 		<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#SESSION.LibID#" null="no">
-		<cfif FORM.Title neq "">
 			<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Title" value="#FORM.Title#" null="no">
-		<cfelse>
-			<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Title" null="yes">
-		</cfif>
 		<cfif FORM.ActivityTypeID neq 0>
 			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@ActivityTypeID" value="#FORM.ActivityTypeID#" null="no">
 		<cfelse>
 			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@ActivityTypeID" null="yes">
 		</cfif>
-		<!---cfif FORM.DeliveryModeID neq 0>
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DeliveryModeID" value="#FORM.DeliveryModeID#" null="no">
-		<cfelse>
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DeliveryModeID" null="yes">
-		</cfif--->
 		<cfif FORM.Description neq "">
 			<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Description" value="#FORM.Description#">
 		<cfelse>
@@ -67,35 +58,22 @@
 		<cfelse>
 			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DepartmentID" null="yes">
 		</cfif>
-		<!---cfif IsDefined("FORM.AffiliationID")>
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@AffiliationID" value="#FORM.AffiliationID#" null="no">
-		<cfelse--->
 			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@AffiliationID" null="yes">
-		<!---/cfif--->
 		<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LearnerCategoryID" null="yes">
 		<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@PrepTime" null="yes">
 		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@PrepComment" null="yes">
 		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Comments" null="yes">
-		<cfprocparam type="In" cfsqltype="CF_SQL_BIT" dbvarname="@ScholarlyCommunication" value="#FORM.ScholarlyCommunication#">
+		<cfprocparam type="In" cfsqltype="CF_SQL_BIT" dbvarname="@ScholarlyCommunication" value="0">
 		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@other_multi_dept" value="#FORM.other_multi_dept#">
+		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@CourseSection" value="#FORM.CourseSection#">
+		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@CourseNumber" value="#FORM.CourseNumber#">
+		<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Learned" value="#FORM.Learned#">
 		<cfprocresult name="Sess">
 	</cfstoredproc>
 	<cflock timeout="#CreateTimeSpan(0, 0, 120, 0)#" throwontimeout="no" type="exclusive" scope="session">
 		<cfset SESSION.SessID = Sess.SessionID>
 	</cflock>
 
-	<!---cfif FORM.LibrarianID neq 0>
-		<cfstoredproc procedure="uspGetLibrarianUnit" datasource="#APPLICATION.dsn#">
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#FORM.LibrarianID#" null="no">
-			<cfprocresult name="GetUnit">
-		</cfstoredproc>
-		<cfset UnitID="#GetUnit.UnitID#">
-		<cfstoredproc procedure="uspAddSessionLibrarian" datasource="#APPLICATION.dsn#">
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@SessID" value="#SESSION.SessID#" null="no">
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#FORM.LibrarianID#" null="no" >
-			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@UnitID" value="#UnitID#" null="no">
-		</cfstoredproc>
-	</cfif--->
 	<cfif IsDefined("FORM.DeveloperIDs")>
 		<cfloop index="theLibrarian" list="#FORM.DeveloperIDs#">
 			<cfstoredproc procedure="uspGetLibrarianUnit" datasource="#APPLICATION.dsn#">
@@ -126,21 +104,23 @@
 		</cfloop>
 	</cfif>
 
-	<!---cfif IsDefined("FORM.ContactID")>
-		<cfloop index="theContact" list="#FORM.ContactID#">
-			<cfstoredproc procedure="uspAddActivityContact" datasource="#APPLICATION.dsn#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#SESSION.LibID#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@ActID" value="#SESSION.ActID#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@CntctID" value="#theContact#">
-			</cfstoredproc>
-
-			<cfstoredproc procedure="uspAddSessionContact" datasource="#APPLICATION.dsn#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#SESSION.LibID#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@SessID" value="#SESSION.SessID#">
-				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@CntctID" value="#theContact#">
+	<cfif IsDefined("FORM.SessionDepartmentID")>
+		<cfloop index="theDepartment" list="#FORM.SessionDepartmentID#">
+			<cfstoredproc procedure="uspAddSessionDepartment" datasource="#APPLICATION.dsn#">
+				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@SessID" value="#SESSION.SessID#" null="no">
+				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DeptID" value="#theDepartment#" null="no" >
 			</cfstoredproc>
 		</cfloop>
-	</cfif--->
+	</cfif>
+
+	<cfif IsDefined("FORM.InitiativeTypes")>
+		<cfloop index="theInitiative" list="#FORM.InitiativeTypes#">
+			<cfstoredproc procedure="uspAddSessionInitiative" datasource="#APPLICATION.dsn#">
+				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@SessID" value="#SESSION.SessID#" null="no">
+				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@InitID" value="#theInitiative#" null="no" >
+			</cfstoredproc>
+		</cfloop>
+	</cfif>
 
 	<cfif FORM.ContactID neq "">
 		<cfstoredproc procedure="uspAddActivityContact" datasource="#APPLICATION.dsn#">
@@ -247,3 +227,30 @@
 				<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@QuarterID" value="#FORM.QuarterID#" null="no">
 			<cfelse>
 			</cfif--->
+		<!---cfif FORM.Title neq "">
+			<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Title" value="#FORM.Title#" null="no">
+		<cfelse>
+			<cfprocparam type="In" cfsqltype="CF_SQL_VARCHAR" dbvarname="@Title" null="yes">
+		</cfif--->
+		<!---cfif FORM.DeliveryModeID neq 0>
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DeliveryModeID" value="#FORM.DeliveryModeID#" null="no">
+		<cfelse>
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@DeliveryModeID" null="yes">
+		</cfif--->
+		<!---cfif IsDefined("FORM.AffiliationID")>
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@AffiliationID" value="#FORM.AffiliationID#" null="no">
+		<cfelse--->
+		<!---/cfif--->
+		<!--cfprocparam type="In" cfsqltype="CF_SQL_BIT" dbvarname="@ScholarlyCommunication" value="#FORM.ScholarlyCommunication#"-->
+	<!---cfif FORM.LibrarianID neq 0>
+		<cfstoredproc procedure="uspGetLibrarianUnit" datasource="#APPLICATION.dsn#">
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#FORM.LibrarianID#" null="no">
+			<cfprocresult name="GetUnit">
+		</cfstoredproc>
+		<cfset UnitID="#GetUnit.UnitID#">
+		<cfstoredproc procedure="uspAddSessionLibrarian" datasource="#APPLICATION.dsn#">
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@SessID" value="#SESSION.SessID#" null="no">
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@LibID" value="#FORM.LibrarianID#" null="no" >
+			<cfprocparam type="In" cfsqltype="CF_SQL_INTEGER" dbvarname="@UnitID" value="#UnitID#" null="no">
+		</cfstoredproc>
+	</cfif--->

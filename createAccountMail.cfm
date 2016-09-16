@@ -1,7 +1,7 @@
-<cfif not Find("createAccount.cfm", PATH_INFO)>
+<!---cfif not Find("createAccount.cfm", PATH_INFO)>
 	<cflocation url="index.cfm" addtoken="no">
 	<cfabort>
-</cfif>
+</cfif--->
 <cftry>
 	<cfmail to="#Email#"
 			from="Diane Mizrachi <mizrachi@library.ucla.edu>"

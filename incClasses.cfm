@@ -27,6 +27,7 @@
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = 3
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -76,6 +77,9 @@
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
 		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
+		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
@@ -109,7 +113,7 @@
 
 <table width="98%" border="1" cellspacing="1" cellpadding="1" summary="Library-Initiated Classes for Fiscal Year">
   <caption align="center" style="font-weight:bold">
-    Library-initiated instruction to classes/groups
+    Workshops
     <cfoutput>
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			<cfif FORM.QuarterID eq 1>Fall</cfif>
@@ -149,7 +153,7 @@
 
 	<cfquery name="Classes" datasource="#APPLICATION.dsn#">
 		SELECT DISTINCT
-			a.Title,
+			dbo.build_session_title(S.SessionID) AS Title,
 			dbo.get_librarian_by_activity(a.ActivityID) AS Librarian,
 			dbo.get_developers_by_session(a.ActivityID) AS Developers,
 			dbo.get_presenters_by_session(s.SessionID) AS Presenters,
@@ -176,6 +180,7 @@
 			LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
 			LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 			LEFT JOIN dbo.DepartmentLookup d ON s.DepartmentID = d.DepartmentID
+			LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 		WHERE
 			a.ActivityTypeID = 3
 			AND l.UnitID = #Units.UnitID#
@@ -225,6 +230,9 @@
 			</cfif>
 			<cfif FORM.CntctID neq 0>
 				AND sco.ContactID = #FORM.CntctID#
+			</cfif>
+			<cfif IsDefined("FORM.SessionDepartmentID")>
+				AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
 			</cfif>
 			<cfif FORM.DepartmentID neq 0>
 				AND s.DepartmentID = #FORM.DepartmentID#
@@ -278,10 +286,10 @@
 				<td align="right">#Classes.Sessions#</td>
 				<td align="right">#Classes.People#</td>
 				<cfif FORM.Duration>
-					<td align="right">#Classes.display_dur#</th>
+					<td align="right">#Classes.Duration#</th>
 				</cfif>
 				<cfif FORM.PrepTime>
-					<td align="right">#Classes.display_prep#</th>
+					<td align="right">#Classes.PrepTime#</th>
 				</cfif>
 			</tr>
 			<cfif FORM.Feedback>
@@ -306,10 +314,10 @@
 			<td align="right">#sessionCount#</td>
 			<td align="right">#peopleCount#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+				<td align="right">#durCount#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+				<td align="right">#prepCount#</td>
 			</cfif>
 		</tr>
 	</table>
@@ -336,10 +344,10 @@
 			<td align="right">#grandSession#</td>
 			<td align="right">#grandPeople#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandDur#></td>
+				<td align="right">#grandDur#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandPrep#></td>
+				<td align="right">#grandPrep#</td>
 			</cfif>
 		</tr>
 	</table>

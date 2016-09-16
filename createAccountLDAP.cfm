@@ -1,7 +1,7 @@
-<cfif not Find("createAccount.cfm", PATH_INFO)>
+<!---cfif not Find("createAccount.cfm", PATH_INFO)>
 	<cflocation url="index.cfm" addtoken="no">
 	<cfabort>
-</cfif>
+</cfif--->
 <cfscript>
 	// LDAPFilter = '(&(mail=' & Email & ')(partialname=' & LastName & ')(partialName=' & FirstName & '))';
 	/*	2005-10-07 akohler

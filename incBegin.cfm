@@ -9,8 +9,17 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 		<link href="css/global.css" rel="stylesheet" type="text/css">
 		<script language="JavaScript" type="text/javascript" src="js/incFunctions.js"></script>
-	</head>
-	<body>
+                <script>
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                
+                  ga('create', 'UA-32672693-3', 'auto');
+                  ga('send', 'pageview');
+                </script>
+    	</head>
+    	<body>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr valign="middle">
 				<td height="35" colspan="6" class="banner">
@@ -18,7 +27,7 @@
 				</td>
 			</tr>
 		</table>
-		<cfif not ListContains("createAccount.cfm,confirmAccount.cfm,setUnit.cfm,getPassword.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+		<cfif not ListContains("createAccount.cfm,confirmAccount.cfm,setUnit.cfm,getPassword.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr valign="middle">
 					<cfif SESSION.UserLevelID neq 3>
@@ -27,7 +36,7 @@
 								<td width="12%"
 									<cfswitch expression="#x#">
 										<cfcase value="1">
-											<cfif ListContains("mySIA.cfm,changePassword.cfm,changedPassword.cfm,updateLibrarian.cfm,updateLibrarianExe.cfm,updatedLibrarian.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+											<cfif ListContains("mySIA.cfm,changePassword.cfm,changedPassword.cfm,updateLibrarian.cfm,updateLibrarianExe.cfm,updatedLibrarian.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
@@ -43,39 +52,39 @@
 											</cfif>
 										</cfcase--->
 										<cfcase value="2">
-											<cfif ListContains("session.cfm,sessions.cfm,sessionsSupe.cfm,addNewSession.cfm,addNewSessionExe.cfm,updateSession.cfm,updateSessionExe.cfm,addSession.cfm,updateAssessment.cfm,updateAssessmentExe.cfm,deleteSession.cfm,deleteSessionExe.cfm,copySession.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")
+											<cfif ListContains("session.cfm,sessions.cfm,sessionsSupe.cfm,addNewSession.cfm,addNewSessionExe.cfm,updateSession.cfm,updateSessionExe.cfm,addSession.cfm,updateAssessment.cfm,updateAssessmentExe.cfm,deleteSession.cfm,deleteSessionExe.cfm,copySession.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")
 												or
-												  (ListContains("addRemoveLibrarian.cfm,addRemoveLibrarianExe.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and (isDefined("SessID") and SessID neq 0))>
+												  (ListContains("addRemoveLibrarian.cfm,addRemoveLibrarianExe.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and (isDefined("SessID") and SessID neq 0))>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
 											</cfif>
 										</cfcase>
 										<cfcase value="3">
-											<cfif ListContains("material.cfm,materials.cfm,addMaterial.cfm,addRemoveMaterial.cfm,addNewMaterial.cfm,addRemoveMaterialExe.cfm,materialAddList.cfm,updateMaterial.cfm,updatedMaterial.cfm,deleteMaterial.cfm,deleteMaterialExe.cfm,materialRemoveList.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")
+											<cfif ListContains("material.cfm,materials.cfm,addMaterial.cfm,addRemoveMaterial.cfm,addNewMaterial.cfm,addRemoveMaterialExe.cfm,materialAddList.cfm,updateMaterial.cfm,updatedMaterial.cfm,deleteMaterial.cfm,deleteMaterialExe.cfm,materialRemoveList.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")
 												or
-												  (ListContains("addRemoveLibrarian.cfm,addRemoveLibrarianExe.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and (isDefined("MatID") and MatID neq 0))>
+												  (ListContains("addRemoveLibrarian.cfm,addRemoveLibrarianExe.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and (isDefined("MatID") and MatID neq 0))>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
 											</cfif>
 										</cfcase>
 										<cfcase value="4">
-											<cfif ListContains("contact.cfm,contacts.cfm,addRemoveContact.cfm,addRemoveContactExe.cfm,addNewContact.cfm,addNewContactExe.cfm,updateContact.cfm,updateContactExe.cfm,outreach.cfm,outreachLog.cfm,addContact.cfm,addSessionContact.cfm,department.cfm,addNewOutreach.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+											<cfif ListContains("contact.cfm,contacts.cfm,addRemoveContact.cfm,addRemoveContactExe.cfm,addNewContact.cfm,addNewContactExe.cfm,updateContact.cfm,updateContactExe.cfm,outreach.cfm,outreachLog.cfm,addContact.cfm,addSessionContact.cfm,department.cfm,addNewOutreach.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
 											</cfif>
 										</cfcase>
 										<cfcase value="5">
-											<cfif ListContains("classrooms.cfm,classroom.cfm,addNewClassroom.cfm,addNewClassroomExe.cfm,addRemoveClassroom.cfm,updateClassroom.cfm,updateClassroomExe.cfm,deleteClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+											<cfif ListContains("classrooms.cfm,classroom.cfm,addNewClassroom.cfm,addNewClassroomExe.cfm,addRemoveClassroom.cfm,updateClassroom.cfm,updateClassroomExe.cfm,deleteClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
 											</cfif>
 										</cfcase>
 										<cfcase value="6">
-											<cfif ListContains("reports.cfm,selReport.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+											<cfif ListContains("reports.cfm,selReport.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"

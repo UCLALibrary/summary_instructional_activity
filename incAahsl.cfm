@@ -149,7 +149,7 @@
 	<cfset prepCount = 0>
 	<cfquery name="Aahsl" datasource="#APPLICATION.dsn#">
 		SELECT DISTINCT
-			a.Title,
+			dbo.build_session_title(S.SessionID) AS Title,
 			Coalesce(s.GroupName, 'N/A') AS GroupName,
 			dbo.get_presenters_by_session(s.SessionID) AS CoLibs,
 			dbo.get_developers_by_session(a.ActivityID) AS Developers,
@@ -245,7 +245,7 @@
 				AND c.FacultyGroup = '#FORM.FacultyGroup#'
 			</cfif>
 		ORDER BY
-			a.Title,
+			Title,
 			GroupName
 	</cfquery>
 
@@ -274,10 +274,10 @@
 				<td align="right">#Aahsl.Sessions#</td>
 				<td align="right">#Aahsl.People#</td>
 				<cfif FORM.Duration>
-					<td align="right">#Aahsl.display_dur#</th>
+					<td align="right">#Aahsl.Duration#</th>
 				</cfif>
 				<cfif FORM.PrepTime>
-					<td align="right">#Aahsl.display_prep#</th>
+					<td align="right">#Aahsl.PrepTime#</th>
 				</cfif>
 			</tr>
 			<cfif FORM.Feedback>
@@ -302,10 +302,10 @@
 			<td align="right">#sessionCount#</td>
 			<td align="right">#peopleCount#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+				<td align="right">#durCount#<!---cfmodule template="convert_time.cfm" total_time=#durCount#---></td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+				<td align="right">#prepCount#<!---cfmodule template="convert_time.cfm" total_time=#prepCount#---></td>
 			</cfif>
 		</tr>
 	</table>
@@ -332,10 +332,10 @@
 			<td align="right">#grandSession#</td>
 			<td align="right">#grandPeople#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandDur#></td>
+				<td align="right">#grandDur#<!---cfmodule template="convert_time.cfm" total_time=#grandDur#---></td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandPrep#></td>
+				<td align="right">#grandPrep#<!---cfmodule template="convert_time.cfm" total_time=#grandPrep#---></td>
 			</cfif>
 		</tr>
 	</table>

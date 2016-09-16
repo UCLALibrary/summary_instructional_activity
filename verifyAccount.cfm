@@ -1,9 +1,9 @@
-<cfif not Find("getPassword.cfm", PATH_INFO)>
+<!---cfif not Find("getPassword.cfm", PATH_INFO)>
 	<cflocation url="index.cfm" addtoken="no">
 	<cfabort>
-</cfif>
+</cfif--->
 <cfquery name="checkAccount" datasource="#APPLICATION.dsn#">
-	SELECT count(LibrarianID) AS account FROM dbo.Librarian WHERE UserName = '<cfoutput>#UserName#</cfoutput>'
+	SELECT count(LibrarianID) AS account FROM dbo.Librarian WHERE UserName = '#UserName#'
 </cfquery>
 <cfscript>
 	if ( checkAccount.account eq 0 )

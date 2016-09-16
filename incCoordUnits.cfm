@@ -18,6 +18,7 @@
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
+		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
 		a.ActivityTypeID = #type#
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -66,6 +67,9 @@
 		</cfif>
 		<cfif FORM.CntctID neq 0>
 			AND sco.ContactID = #FORM.CntctID#
+		</cfif>
+		<cfif IsDefined("FORM.SessionDepartmentID")>
+			AND sd.DepartmentID IN (#FORM.SessionDepartmentID#)
 		</cfif>
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#

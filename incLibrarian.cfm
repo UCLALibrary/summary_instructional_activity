@@ -37,7 +37,7 @@
 							</tr>
 							<tr valign="top">
 								<td class="fieldLabel">Unit:</td>
-								<td class="fieldValue"><cfif Librarian.Unit neq ""><cfif not ListContains("infoLibrarian.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="unit.cfm?UID=#Librarian.UnitID#">#Librarian.Unit#</a><cfelse>#Librarian.Unit#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
+								<td class="fieldValue"><cfif Librarian.Unit neq ""><cfif not ListContains("infoLibrarian.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="unit.cfm?UID=#Librarian.UnitID#">#Librarian.Unit#</a><cfelse>#Librarian.Unit#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
 							</tr>
 							<tr valign="top">
 								<td class="fieldLabel">Address:</td>
@@ -50,7 +50,7 @@
 						<table border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
 								<td class="fieldLabel">Email:</td>
-								<td class="fieldValue"><cfif Librarian.Email neq ""><cfif not ListContains("infoLibrarian.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="mailto:#Librarian.Email#">#Librarian.Email#</a><cfelse>#Librarian.Email#</cfif></cfif></td>
+								<td class="fieldValue"><cfif Librarian.Email neq ""><cfif not ListContains("infoLibrarian.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="mailto:#Librarian.Email#">#Librarian.Email#</a><cfelse>#Librarian.Email#</cfif></cfif></td>
 							</tr>
 							<tr valign="top">
 								<td class="fieldLabel">Telephone:</td>
@@ -85,7 +85,7 @@
 								<input name="LibID" type="hidden" value="#Librarian.LibrarianID#">
 							</form>
 						</td>
-						<cfif ListContains("updatedLibrarian.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+						<cfif ListContains("updatedLibrarian.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 							<td width="12">&nbsp;</td>
 							<td>
 								<form action="mySIA.cfm" method="post">

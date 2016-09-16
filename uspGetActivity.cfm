@@ -123,7 +123,7 @@ FiscalY = 0;
 	<cfscript>
 		ord = IIf(ord eq "d", DE("a"), DE("d"));
 	</cfscript>
-	<cfif ListContains("activities.cfm,addSession.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ListContains("activities.cfm,addSession.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 <!--- lookup query for units --->
 		<cfif UID neq 0>
 			<cfscript>

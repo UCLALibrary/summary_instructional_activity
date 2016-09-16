@@ -162,9 +162,9 @@
 				<tr valign="top">
 					<td>
 						<input name="reqElements" type="hidden" value="UserName,Library network user name">
-						<input name="Submit" type="submit" class="mainControl" style="width:100px;" value="OK" onclick="JavaScript:setVersion(Contact, 'main');">
+						<input name="Submit" type="submit" class="mainControl" style="width:100px;" value="OK"><!-- onclick="JavaScript:setVersion(Contact, 'main');"-->
 					<td>
-						<input name="Submit" type="submit" class="mainControl" value="Cancel" onclick="JavaScript:setVersion(Contact, 'alt');">
+						<input name="Submit" type="submit" class="mainControl" value="Cancel"><!-- onclick="JavaScript:setVersion(Contact, 'alt');"-->
 					</td>
 				</tr>
 			</table>

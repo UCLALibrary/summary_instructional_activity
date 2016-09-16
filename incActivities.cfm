@@ -77,7 +77,7 @@
 				<td class="first">No instructional sessions</td>
 			</tr>
 		</table>
-		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("activities.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("activities.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 			<form action="addNewActivity.cfm" method="post">
 				<input type="submit" class="mainControl" value="Add New Activity">
 			</form>
@@ -162,7 +162,7 @@
 			</cfoutput>
 		</table>
 		<!---cfif SESSION.UserLevelID lt 3 and ListContains("activities.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")--->
-		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("activities.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("activities.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 			<form action="addNewActivity.cfm" method="post">
 				<input type="submit" class="mainControl" value="Add New Activity">
 			</form>

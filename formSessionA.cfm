@@ -12,6 +12,7 @@
 <cfinclude template="incJSShowCalendar.cfm">
 <cfinclude template="incJSShowContacts.cfm">
 <cfinclude template="incJSShowPresenters.cfm">
+<cfinclude template="incJSShowDepartments.cfm">
 <cfquery name="CurrentUser" datasource="#APPLICATION.dsn#">
 	SELECT
 		LibrarianID,
@@ -43,13 +44,13 @@
 			{
 				if ( form.version.value == 'main' )
 				{
-					if ( form.Title.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") == "" )
+					/*if ( form.Title.value.replace(/^(\s+)/,"").replace(/(\s+)$/,"") == "" )
 					{
 						alert("Please include a session title/number");
 						form.Title.select();
 						form.Title.focus();
 						return false;
-					}
+					}*/
 
 					if ( ! typeSelected(form) )
 					{
@@ -189,9 +190,41 @@
 					<tr valign="top">
 						<td><!-- colspan="3"-->
 							<em class="required">*</em>
-							<cfset elementName = "Title">
-							<cfset elementLabel = "Course number & course title (<em>If applicable</em>; copy and paste from the <a href='http://www.registrar.ucla.edu/schedule/' target='_blank' class='navLink0'>Schedule of Classes</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;OR enter group, session name, and/or ""Consultation.""">
-							<cfinclude template="incHiLiteMissingElement.cfm"><br>
+							Department | Campus Unit | Group<br/>
+							<input name="SessionDepartment" type="text" size="55" value="" disabled="true" readonly="true">
+							<input type="hidden" name="SessionDepartmentID" value="">
+							<a href="javascript:ShowDepartments('Session','SessionDepartment','SessionDepartmentID')">Select Department|Unit|Group</a>
+							<br/><em>Select the department, campus unit, or group.</em>
+						</td>
+						<td>
+							Instructional Contact(s) (e.g., course instructor):<br>
+							<input type="text" name="ContactName" value="" disabled="true" readonly="true">
+							<!---textarea name="ContactName" disabled="true" readonly="true"></textarea--->
+							<input type="hidden" name="ContactID" value="">
+							<a href="javascript:ShowContacts('Session','ContactName','ContactID')">Select Contact</a>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+
+					<tr valign="top">
+						<td>
+							Course Number<br/>
+							<input name="CourseNumber" type="text" size="55" value="">
+						</td>
+						<td>
+							Course Section<br/>
+							<input name="CourseSection" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<em>If a course, add the course number and section as they appear in the <a href='https://sa.ucla.edu/ro/Public/SOC' target='_blank' class='navLink0'>Schedule of Classes</a></em>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2">
+							Session Title<br/>
 							<input
 								name="Title"
 								type="text"
@@ -204,21 +237,16 @@
 								<cfelse>
 									value=""
 								</cfif>
-							>
+							><br/>
+							<em>Include a title for sessions not related to departments/courses</em>
 						</td>
-						<td>
-							Instructional Contact(s) (e.g., course instructor):<br>
-							<input type="text" name="ContactName" value="" disabled="true" readonly="true">
-							<!---textarea name="ContactName" disabled="true" readonly="true"></textarea--->
-							<input type="hidden" name="ContactID" value="">
-							<a href="javascript:ShowContacts('Session','ContactName','ContactID')">Select Contact</a>
-						</td>
-						<td>&nbsp;</td>
 					</tr>
 					<tr valign="top">
 						<td><!--colspan="2"-->
-							Description of session/consultation/topic<br>
+							Description of session/topic<br>
 							<textarea name="Description" cols="48" rows="4"><cfif isDefined("FORM.Description")>#FORM.Description#<cfelseif isDefined("Activity.Description")>#Activity.Description#<cfelse></cfif></textarea>
+							<br/>
+							<em>Provide additional information about the course or instructional context,<br/> your learning objectives, and the learners for this session.</em>
 						</td>
 						<td>
 						<table>
@@ -400,16 +428,16 @@
 				<h3>Session Details</h3>
 
 				<table border="0" cellpadding="0" cellspacing="0">
-					<tr valign="top">
+					<!--tr valign="top">
 						<td colspan="3">
 							Session type is required.<br/>
 							If you select Yes for Scholarly Communication, then select fron the Scholarly Communication<br/>
 							topic(s).  To unselect a Scholarly Communication topic, ctrl-click the topic to unselect it.<br/>
 							<a href="sessDefs.html" target="_blank">Definitions</a> of session types.
 						</td>
-					</tr>
+					</tr-->
 					<tr valign="top">
-						<td>
+						<td width="45%">
 							<em class="required">*</em>
 							Session type<br>
 							<cfset Lookup = "ActivityType">
@@ -422,14 +450,30 @@
 									<cfelseif isDefined("Activity.ActivityTypeID") and Activity.ActivityTypeID eq ActivityType.ActivityTypeID>
 										checked
 									</cfif>
-								>#ActivityType.ActivityType#<br/>
+								><b>#ActivityType.ActivityType#</b><br/>
+								<div class="help">#ActivityType.HelpText#</div><br/>
 							</cfloop>
 						</td>
-						<td>
-							<em class="required">*</em>
+						<td width="55%">
+							Strategic Priorities & Initiatives<br/>
+							<cfset Lookup = "Initiative">
+							<cfset Header = "">
+							<cfinclude template="uspGetLookup.cfm">
+							<cfloop query="Initiative">
+								<input type="checkbox" name="InitiativeTypes" value="#Initiative.InitiativeID#"
+									<cfif isDefined("FORM.InitiativeTypes")>
+										<cfloop index="typeID" list="#FORM.InitiativeTypes#" delimiters=",">
+											<cfif typeID eq Initiative.InitiativeID>checked
+												<cfbreak>
+											</cfif>
+										</cfloop>
+									</cfif>
+								>#Initiative.Initiative#<br/>
+							</cfloop>
+							<!--em class="required">*</em>
 							Scholarly Communication<br>
 							<input type="radio" name="ScholarlyCommunication" value="1">Yes
-							<input type="radio" name="ScholarlyCommunication" value="0" checked>No
+							<input type="radio" name="ScholarlyCommunication" value="0" checked>No-->
 						</td>
 						<td>&nbsp;</td>
 					</tr>
@@ -521,6 +565,12 @@
 						</td>
 						<td>&nbsp;</td>
 					</tr>
+					<tr>
+						<td colspan="2">
+							What did *you* learn as a result of this session that might be helpful to others?<br/>
+							<textarea name="Learned" cols="50" rows="5"></textarea>
+						</td>
+					</tr>
 					<tr valign="top">
 						<td colspan="2">
 							Learner Academic Departments and More<br>
@@ -553,7 +603,7 @@
 					<tr>
 						<td>
 							<input name="caller" type="hidden" value="formA">
-							<input name="reqElements" type="hidden" value="Title,Course/group title;ActivityTypeID,Session type;DeliveryModeID,Delivery mode;NumAttendees,number of students;LearnerCategory, learner category">
+							<input name="reqElements" type="hidden" value="ActivityTypeID,Session type;DeliveryModeID,Delivery mode;NumAttendees,number of students;LearnerCategory, learner category">
 							<input name="Submit" type="submit" class="mainControl" style="width:100px;" value="OK" onclick="JavaScript:setVersion(Session, 'main');">
 						</td>
 						<td>

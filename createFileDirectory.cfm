@@ -1,7 +1,7 @@
-<cfif not Find("createAccount.cfm", PATH_INFO)>
+<!---cfif not Find("createAccount.cfm", PATH_INFO)>
 	<cflocation url="index.cfm" addtoken="no">
 	<cfabort>
-</cfif>
+</cfif--->
 <cftry>
 	<cfdirectory directory="#APPLICATION.FileDirectory##UserName#" action="create">
 	<cfcatch type="Any">

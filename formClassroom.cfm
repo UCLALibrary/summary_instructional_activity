@@ -158,11 +158,11 @@
 	</script>
 	<cfoutput>
 		<cfscript>
-			if (ListContains("updateClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))
+			if (ListContains("updateClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))
 			{
 				Action = "updateClassroom.cfm";
 			}
-			else if (ListContains("addRemoveClassroom.cfm,addNewClassroom.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))
+			else if (ListContains("addRemoveClassroom.cfm,addNewClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))
 			{
 				Action = "addNewClassroom.cfm";
 			}

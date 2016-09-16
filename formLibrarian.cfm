@@ -342,7 +342,7 @@
 			</div>
 		</form>
 	</cfoutput>
-	<cfif ListContains("updateLibrarian.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ListContains("updateLibrarian.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 		<cfscript>
 			// initialize variables for uspGetAccount stored procedure
 			LibID = LibID;

@@ -33,7 +33,7 @@
 								<td nowrap class="fieldLabel">Activity/course type:</td>
 								<td class="fieldValue">
 									<cfif Activity.ActivityType neq "">
-										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and (SESSION.UserLevelID gt 1)>
+										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and (SESSION.UserLevelID gt 1)>
 											<a href="activities.cfm?ActTypID=#Activity.ActivityTypeID#">#Activity.ActivityType#</a>
 										<cfelse>#Activity.ActivityType#
 										</cfif>
@@ -45,7 +45,7 @@
 								<td nowrap class="fieldLabel">Delivery mode:</td>
 								<td class="fieldValue">
 									<cfif Activity.DeliveryMode neq "">
-										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and (SESSION.UserLevelID gt 1)>
+										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and (SESSION.UserLevelID gt 1)>
 											<a href="activities.cfm?DelModID=#Activity.DeliveryModeID#">#Activity.DeliveryMode#</a>
 										<cfelse>#Activity.DeliveryMode#
 										</cfif>
@@ -68,7 +68,7 @@
 										<ul>
 											<cfloop query="Material">
 												<li>
-													<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+													<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 														<a href="material.cfm?MatID=#Material.MaterialID#">#Material.MaterialTitle#</a>
 													<cfelse>#Material.MaterialTitle#
 													</cfif>
@@ -82,7 +82,7 @@
 										  ( ListContains(ActEditorID, SESSION.LibID, ",") ) and--->
 									<cfif ( ( SESSION.UserLevelID eq 1 and ListContains(ActEditorID, SESSION.LibID, ",") ) or
 									        ( SESSION.UserLevelID eq 5 ) ) and
-										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") )>
+										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") )>
 										<form action="addRemoveMaterial.cfm" method="post">
 											<input name="ActID" type="hidden" value="#ActID#">
 											<cfif Material.RecordCount gt 0>
@@ -99,7 +99,7 @@
 								<td class="fieldValue">
 									<cfif Contact.RecordCount neq 0>
 										<cfloop query="Contact">
-											<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+											<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												<a href="contact.cfm?CntctID=#Contact.ContactID#">#Contact.Contact#</a>
 											<cfelse>#Contact.Contact#
 											</cfif><br>
@@ -111,7 +111,7 @@
 										  ( ListContains(ActEditorID, SESSION.LibID, ",") ) and--->
 									<cfif ( ( SESSION.UserLevelID eq 1 and ListContains(ActEditorID, SESSION.LibID, ",") ) or
 									        ( SESSION.UserLevelID eq 5 ) ) and
-										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") )>
+										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") )>
 										<form action="addRemoveContact.cfm" method="post">
 											<input name="ActID" type="hidden" value="#ActID#">
 											<cfif Contact.RecordCount gt 0>
@@ -133,7 +133,7 @@
 								<td class="fieldValue">
 									<cfset x = 0>
 									<cfoutput>
-										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") and (SESSION.UserLevelID gt 1)>
+										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and (SESSION.UserLevelID gt 1)>
 											<a href="librarian.cfm?LibID=#Activity.LibrarianID#">#Activity.LibrarianLastName#</a>
 											(<a href="activities.cfm?UID=#Activity.UnitID#">#Activity.Unit#</a>)
 										<cfelse>
@@ -146,7 +146,7 @@
 										  ( SESSION.LibID eq DBRCreatorID ) and--->
 									<cfif ( ( SESSION.UserLevelID eq 1 and ListContains(ActEditorID, SESSION.LibID, ",") ) or
 									        ( SESSION.UserLevelID eq 5 ) ) and
-										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") )>
+										  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") )>
 										<form action="addRemoveLibrarian.cfm" method="post">
 											<input name="ActID" type="hidden" value="#ActID#">
 											<cfif x gte 2>
@@ -187,7 +187,7 @@
 								<td nowrap class="fieldLabel">Quarter:</td>
 								<td class="fieldValue">
 									<cfif Activity.Quarter neq "" and Activity.CompletionDT neq "">
-										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+										<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 											<a href="activities.cfm?Yr=#DatePart("yyyy", Activity.CompletionDT)#&QuartID=#Activity.QuarterID#">'#Right(DatePart("yyyy", Activity.CompletionDT), 2)# #Activity.Quarter#</a>
 										<cfelse>
 											'#Right(DatePart("yyyy", Activity.CompletionDT), 2)# #Activity.Quarter#
@@ -201,7 +201,7 @@
 								<td class="fieldValue">
 									#DateFormat(Activity.DBRCreatedDT, APPLICATION.dateFormat)# #TimeFormat(Activity.DBRCreatedDT, APPLICATION.timeFormat)#
 									by
-									<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="librarian.cfm?LibID=#Activity.DBRCreatorID#">#Activity.DBRCreator#</a>
 									<cfelse>#Activity.DBRCreator#
 									</cfif>
@@ -212,7 +212,7 @@
 								<td class="fieldValue">
 									#DateFormat(Activity.DBRUpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Activity.DBRUpdatedDT, APPLICATION.timeFormat)#
 									by
-									<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+									<cfif not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 										<a href="librarian.cfm?LibID=#Activity.DBRUpdaterID#">#Activity.DBRUpdater#</a>
 									<cfelse>#Activity.DBRUpdater#
 									</cfif>
@@ -226,7 +226,7 @@
 				  ( ListContains(ActEditorID, SESSION.LibID, ",") ) and--->
 			<cfif ( ( SESSION.UserLevelID eq 1 and ListContains(ActEditorID, SESSION.LibID, ",") ) or
 					( SESSION.UserLevelID eq 5 ) ) and
-				  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",") )>
+				  ( not ListContains("infoActivity.cfm,deleteActivity.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") )>
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>

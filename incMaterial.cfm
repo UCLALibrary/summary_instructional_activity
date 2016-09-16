@@ -41,12 +41,12 @@
 		<cfif not Material.IsFile>
 						<tr valign="top">
 							<td nowrap class="fieldLabel">URL:</td>
-							<td class="fieldValue"><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="#Material.URL#" target="blank">#Material.URL#</a><cfelse>#Material.URL#</cfif></td>
+							<td class="fieldValue"><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="#Material.URL#" target="blank">#Material.URL#</a><cfelse>#Material.URL#</cfif></td>
 						</tr>
 		</cfif>
 					<tr valign="top">
 						<td nowrap class="fieldLabel">Material type:</td>
-						<td class="fieldValue"><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="materials.cfm?MatTypID=#Material.MaterialTypeID#">#Material.MaterialType#</a><cfelse>#Material.MaterialType#</cfif>
+						<td class="fieldValue"><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="materials.cfm?MatTypID=#Material.MaterialTypeID#">#Material.MaterialType#</a><cfelse>#Material.MaterialType#</cfif>
 						</td>
 					</tr>
 					<tr valign="top">
@@ -104,14 +104,14 @@
 		</cfif>
 		<cfif Contact.RecordCount neq 0>
 			<cfloop query="Contact">
-				<cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="contact.cfm?CntctID=#Contact.ContactID#">#Contact.Contact#</a><cfelse>#Contact.Contact#</cfif><br>
+				<cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="contact.cfm?CntctID=#Contact.ContactID#">#Contact.Contact#</a><cfelse>#Contact.Contact#</cfif><br>
 			</cfloop>
 		<cfelse>
 			#APPLICATION.nullCaption#<br>
 		</cfif>
 		<cfif ("1,5" contains SESSION.UserLevelID)
 		      and ListContains(MatEditorID, SESSION.LibID, ",")
-			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))>
+			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))>
 			<form action="addRemoveContact.cfm" method="post">
 			<input name="MatID" type="hidden" value="#MatID#">
 			<cfif Contact.RecordCount gt 0>
@@ -130,10 +130,10 @@
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td nowrap class="fieldLabel">Developed by:</td>
-						<td class="fieldValue"><cfset x = 0><cfoutput><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="librarian.cfm?LibID=#Material.LibrarianID#">#Material.LibrarianLastName#</a> (<a href="materials.cfm?UID=#Material.UnitID#">#Material.Unit#</a>)<cfelse>#Material.LibrarianLastName# (#Material.Unit#)</cfif><br><cfset x = x + 1></cfoutput>
+						<td class="fieldValue"><cfset x = 0><cfoutput><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="librarian.cfm?LibID=#Material.LibrarianID#">#Material.LibrarianLastName#</a> (<a href="materials.cfm?UID=#Material.UnitID#">#Material.Unit#</a>)<cfelse>#Material.LibrarianLastName# (#Material.Unit#)</cfif><br><cfset x = x + 1></cfoutput>
 		<cfif ("1,5" contains SESSION.UserLevelID)
 		      and (SESSION.LibID eq DBRCreatorID)
-			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))>
+			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))>
 			<form action="addRemoveLibrarian.cfm" method="post">
 			<input name="MatID" type="hidden" value="#MatID#">
 			<cfif x gte 2>
@@ -159,15 +159,15 @@
 					</tr>
 					<tr valign="top">
 						<td nowrap class="fieldLabel">Quarter:</td>
-						<td class="fieldValue"><cfif Material.CompletionDT neq "" and Material.Quarter neq ""><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="materials.cfm?Yr=#DatePart("yyyy", Material.CompletionDT)#&QuartID=#Material.QuarterID#">'#Right(DatePart("yyyy", Material.CompletionDT), 2)# #Material.Quarter#</a><cfelse> '#Right(DatePart("yyyy", Material.CompletionDT), 2)# #Material.Quarter#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
+						<td class="fieldValue"><cfif Material.CompletionDT neq "" and Material.Quarter neq ""><cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="materials.cfm?Yr=#DatePart("yyyy", Material.CompletionDT)#&QuartID=#Material.QuarterID#">'#Right(DatePart("yyyy", Material.CompletionDT), 2)# #Material.Quarter#</a><cfelse> '#Right(DatePart("yyyy", Material.CompletionDT), 2)# #Material.Quarter#</cfif><cfelse>#APPLICATION.nullCaption#</cfif></td>
 					</tr>
 					<tr valign="top">
 						<td nowrap class="fieldLabel">Input on:</td>
-						<td class="fieldValue">#DateFormat(Material.DBRCreatedDT, APPLICATION.dateFormat)# #TimeFormat(Material.DBRCreatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="librarian.cfm?LibID=#Material.DBRCreatorID#">#Material.DBRCreator#</a><cfelse>#Material.DBRCreator#</cfif></td>
+						<td class="fieldValue">#DateFormat(Material.DBRCreatedDT, APPLICATION.dateFormat)# #TimeFormat(Material.DBRCreatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="librarian.cfm?LibID=#Material.DBRCreatorID#">#Material.DBRCreator#</a><cfelse>#Material.DBRCreator#</cfif></td>
 					</tr>
 					<tr valign="top">
 						<td nowrap class="fieldLabel">Last updated:</td>
-						<td class="fieldValue">#DateFormat(Material.DBRUpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Material.DBRUpdatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")><a href="librarian.cfm?LibID=#Material.DBRUpdaterID#">#Material.DBRUpdater#</a><cfelse>#Material.DBRUpdater#</cfif></td>
+						<td class="fieldValue">#DateFormat(Material.DBRUpdatedDT, APPLICATION.dateFormat)# #TimeFormat(Material.DBRUpdatedDT, APPLICATION.timeFormat)# by <cfif not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")><a href="librarian.cfm?LibID=#Material.DBRUpdaterID#">#Material.DBRUpdater#</a><cfelse>#Material.DBRUpdater#</cfif></td>
 					</tr>
 				</table>
 			</td>
@@ -175,7 +175,7 @@
 	</table>
 		<cfif ("1,5" contains SESSION.UserLevelID)
 		      and ListContains(MatEditorID, SESSION.LibID, ",")
-			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))>
+			  and (not ListContains("infoMaterial.cfm,deleteMaterial.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))>
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>

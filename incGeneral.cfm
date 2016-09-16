@@ -3,8 +3,8 @@
 <cfset durGrand = 0>
 <cfset prepGrand = 0>
 
-<cfset colSpan = 7>
-<cfset spacer = 4>
+<cfset colSpan = 8>
+<cfset spacer = 5>
 <cfif FORM.Duration>
 	<cfset colSpan = colSpan + 1>
 </cfif>
@@ -67,6 +67,7 @@
 		<tr>
 			<th scope="col" align="left">Quarter</th>
 			<th scope="col" align="left">Course or Group/Session name</th>
+			<th scope="col" align="left">Description</th>
 			<th scope="col" align="left">Presenter(s)</th>
 			<th scope="col" align="left">Developer(s)</th>
 			<th scope="col" align="left">Date</th>
@@ -85,16 +86,17 @@
 			<tr>
 				<td align="left">#Sessions.Quarter#</td>
 				<td align="left">#Sessions.Title#</td>
+				<td align="left">#Sessions.Description#</td>
 				<td scope="col" align="left">#Sessions.Presenters#</td>
 				<td scope="col" align="left">#Sessions.Developers#</td>
 				<td scope="col" align="left">#Sessions.StyledSessionDateTime#</td>
 				<td align="right">#Sessions.Sessions#</td>
 				<td align="right">#Sessions.People#</td>
 				<cfif FORM.Duration>
-					<td align="right">#Sessions.display_dur#</th>
+					<td align="right">#Sessions.Duration#</th>
 				</cfif>
 				<cfif FORM.PrepTime>
-					<td align="right">#Sessions.display_prep#</th>
+					<td align="right">#Sessions.PrepTime#</th>
 				</cfif>
 			</tr>
 			<cfif FORM.Feedback>
@@ -117,10 +119,10 @@
 			<td align="right">#sessionCount#</td>
 			<td align="right">#peopleCount#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+				<td align="right">#durCount#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+				<td align="right">#prepCount#</td>
 			</cfif>
 		</tr>
 	<table>
@@ -147,10 +149,10 @@
 			<td align="right">#sessionGrand#</td>
 			<td align="right">#peopleGrand#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#durGrand#></td>
+				<td align="right">#durGrand#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepGrand#></td>
+				<td align="right">#prepGrand#</td>
 			</cfif>
 		</tr>
 	</table>

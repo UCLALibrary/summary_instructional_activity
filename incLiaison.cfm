@@ -8,7 +8,7 @@
 
 <cfquery name="Liaison" datasource="#APPLICATION.dsn#">
 	SELECT DISTINCT
-		a.Title,
+		dbo.build_session_title(S.SessionID) AS Title,
 		u.Unit,
 		Coalesce(s.GroupName, 'N/A') AS GroupName,
 		dbo.get_presenters_by_session(s.SessionID) AS CoLibs,
@@ -22,13 +22,14 @@
 		dbo.Activity a
 		JOIN dbo.SessionActivity sa ON a.ActivityID = sa.ActivityID
 		JOIN dbo.Session s ON sa.SessionID = s.SessionID
-		LEFT JOIN dbo.SessionLibrarian sl ON s.SessionID = sl.SessionID
+		LEFT JOIN dbo.SessionLibrarian sl ON s.SessionID = sl.SessionID AND s.CreatedBy = sl.LibrarianID
 		LEFT JOIN dbo.UnitLookup u ON sl.UnitID = u.UnitID
 		LEFT JOIN dbo.SessionContact sco ON s.SessionID = sco.SessionID
 		LEFT JOIN dbo.SessionClassroom scl ON s.SessionID = scl.SessionID
 		LEFT JOIN dbo.ActivityMaterial am ON a.ActivityID = am.ActivityID
 		LEFT JOIN dbo.Material m ON am.MaterialID = m.MaterialID
 		LEFT JOIN dbo.Contact c ON sco.ContactID = c.ContactID
+		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 	WHERE
 		a.ActivityTypeID = 6
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
@@ -78,8 +79,8 @@
 		<cfif FORM.DepartmentID neq 0>
 			AND s.DepartmentID = #FORM.DepartmentID#
 		</cfif>
-		<cfif FORM.LearnerCategoryID neq 0>
-			AND s.LearnerCategoryID = #FORM.LearnerCategoryID#
+		<cfif IsDefined("FORM.LearnerCategoryID")>
+			AND slR.LearnerCategoryID IN (#FORM.LearnerCategoryID#)
 		</cfif>
 		<cfif FORM.AffiliationID neq 0>
 			AND s.AffiliationID = #FORM.AffiliationID#
@@ -209,10 +210,10 @@
 				<td align="right">#Liaison.Sessions#</td>
 				<td align="right">#Liaison.People#</td>
 				<cfif FORM.Duration>
-					<td align="right">#Liaison.display_dur#</th>
+					<td align="right">#Liaison.Duration#</th>
 				</cfif>
 				<cfif FORM.PrepTime>
-					<td align="right">#Liaison.display_prep#</th>
+					<td align="right">#Liaison.PrepTime#</th>
 				</cfif>
 			</tr>
 		<cfset sessionCount = sessionCount + Liaison.Sessions>
@@ -237,10 +238,10 @@
 			<td align="right">#sessionCount#</td>
 			<td align="right">#peopleCount#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#durCount#></td>
+				<td align="right">#durCount#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#prepCount#></td>
+				<td align="right">#prepCount#</td>
 			</cfif>
 		</tr>
 		<tr>
@@ -256,10 +257,10 @@
 			<td align="right">#grandSession#</td>
 			<td align="right">#grandPeople#</td>
 			<cfif FORM.Duration>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandDur#></td>
+				<td align="right">#grandDur#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right"><cfmodule template="convert_time.cfm" total_time=#grandPrep#></td>
+				<td align="right">#grandPrep#</td>
 			</cfif>
 		</tr>
 	</cfoutput>

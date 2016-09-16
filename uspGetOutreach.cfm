@@ -95,7 +95,7 @@ FiscalY = 0;
 	<cfscript>
 		ord = IIf(ord eq "d", DE("a"), DE("d"));
 	</cfscript>
-	<cfif ListContains("outreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ListContains("outreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 <!--- lookup query for departments --->
 		<cfif DeptID neq 0>
 			<cfscript>
@@ -161,7 +161,7 @@ FiscalY = 0;
 			<cfinclude template="uspGetLibrarian.cfm">
 		</cfif>
 	</cfif>
-	<cfif ListContains("outreachLog.cfm,deleteOutreach.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+	<cfif ListContains("outreachLog.cfm,deleteOutreach.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 <!--- lookup query for outreach method --->
 		<cfif Outreach.Method neq "">
 			<cfscript>

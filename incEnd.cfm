@@ -1,6 +1,6 @@
 		</div>
 		<div align="left">
-			<a href="mailto:mizrachi@library.ucla.edu">Questions? Comments? Contact Us!</a>
+			<a href="https://docs.library.ucla.edu/x/KpSqBw">Questions? Comments? Contact Us!</a>
 		</div>
 	</body>
 </html>

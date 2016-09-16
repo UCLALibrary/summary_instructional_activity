@@ -8,12 +8,12 @@
 <!--- Use production DSN and other values only on unitproj, otherwise use test DSN --->
 <cfif FindNoCase("unitproj", CGI.SERVER_NAME) EQ 1>
 	<cfset APPLICATION.dsn = "SIA">
-	<cfset APPLICATION.HostServer = "http://sia.library.ucla.edu"> <!--- CAN WE GET THIS FROM CGI.SERVER_NAME? --->
+	<cfset APPLICATION.HostServer = ""> <!--- CAN WE GET THIS FROM CGI.SERVER_NAME? --->
 <cfelse>
 	<cfset APPLICATION.dsn = "SIA_Test">
-	<cfset APPLICATION.HostServer = "http://siadev.library.ucla.edu">
+	<cfset APPLICATION.HostServer = "">
 </cfif>			   
-
+<cfset this.enablerobustexception = true />
 <!--- 
     Not sure how this is used in the application.  I set FilePath = "files/" - relative to this Application.cfm, same directory.
     FileDirectory then becomes the path-on-disk corresponding to FilePath.

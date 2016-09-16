@@ -1,4 +1,4 @@
-<cfif (isDefined("Contact.RecordCount") and Contact.RecordCount eq 0) and not ListContains("addRemoveContact.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+<cfif (isDefined("Contact.RecordCount") and Contact.RecordCount eq 0) and not ListContains("addRemoveContact.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 	<cfset pageTitle = "No Contact Found">
 	<cfinclude template="incBegin.cfm">
 	<span class="dataSectionTitle"><cfoutput>#pageTitle#</cfoutput></span>
@@ -11,7 +11,7 @@
 	</div>
 <cfelse>
 	<cfscript>
-		if (ListContains("addRemoveContact.cfm,addNewContact.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))
+		if (ListContains("addRemoveContact.cfm,addNewContact.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))
 		{
 			if (ActID neq 0)
 			{
@@ -193,11 +193,11 @@
 	</script>
 	<cfoutput>
 		<cfscript>
-			if (ListContains("updateContact.cfm,updateContactExe.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))
+			if (ListContains("updateContact.cfm,updateContactExe.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))
 			{
 				Action = "updateContact.cfm";
 			}
-			else if (ListContains("addRemoveContact.cfm,addNewContact.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ","))
+			else if (ListContains("addRemoveContact.cfm,addNewContact.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ","))
 			{
 				Action = "addNewContact.cfm";
 			}

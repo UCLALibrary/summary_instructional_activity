@@ -29,7 +29,7 @@
 		LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 		LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 	WHERE
-		a.ActivityTypeID = 1
+		a.ActivityTypeID = 10
 		<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 			AND
 			(
@@ -113,7 +113,7 @@
 
 <table width="98%" summary="Orientations & Tours from SIA">
 	<caption align="center" style="font-weight:bold">
-		Orientations & Tours
+		Train-the-trainer
 		<cfoutput>
 			<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 				<cfif FORM.QuarterID eq 1>Fall</cfif>
@@ -182,7 +182,7 @@
 			LEFT JOIN dbo.SessionLearner slR ON s.SessionID = slR.SessionID
 			LEFT JOIN dbo.SessionDepartment sd ON s.SessionID = sd.SessionID
 		WHERE
-			a.ActivityTypeID = 1
+			a.ActivityTypeID = 10
 			AND l.UnitID = #Units.UnitID#
 			<cfif FORM.QuarterID neq 0 and FORM.FYear eq 0 and FORM.CYear eq 0>
 				AND
@@ -311,10 +311,10 @@
 			<td align="right">#sessionCount#</td>
 			<td align="right">#peopleCount#</td>
 			<cfif FORM.Duration>
-				<td align="right">#durCount#<!---cfmodule template="convert_time.cfm" total_time=#durCount#---></td>
+				<td align="right">#durCount#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#prepCount#<!---cfmodule template="convert_time.cfm" total_time=#prepCount#---></td>
+				<td align="right">#prepCount#</td>
 			</cfif>
 		</tr>
 	</table>
@@ -341,10 +341,10 @@
 			<td align="right">#grandSession#</td>
 			<td align="right">#grandPeople#</td>
 			<cfif FORM.Duration>
-				<td align="right">#grandDur#<!---cfmodule template="convert_time.cfm" total_time=#grandDur#---></td>
+				<td align="right">#grandDur#</td>
 			</cfif>
 			<cfif FORM.PrepTime>
-				<td align="right">#grandPrep#<!---cfmodule template="convert_time.cfm" total_time=#grandPrep#---></td>
+				<td align="right">#grandPrep#</td>
 			</cfif>
 		</tr>
 	</table>

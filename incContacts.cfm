@@ -60,7 +60,7 @@
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr valign="top"><td class="first">No contacts</td></tr>
 		</table>
-		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+		<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 			<form action="addRemoveContact.cfm" method="post">
 				<input name="LibID" type="hidden" value="<cfoutput>#SESSION.LibID#</cfoutput>">
 				<input name="Add" type="submit" class="mainControl" value="Add Contact">
@@ -74,7 +74,7 @@
 			<p style="font-size: small;">
 				To enter an Outreach, select a Contact and hit the Add Outreach button.
 			</p>
-			<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+			<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 				<form action="addRemoveContact.cfm" method="post">
 					<input name="LibID" type="hidden" value="#SESSION.LibID#">
 					<cfif Contact.RecordCount gt 0>
@@ -187,7 +187,7 @@
 			</cfoutput>
 		</table>
 		<cfoutput>
-			<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+			<cfif ( "1,5" contains SESSION.UserLevelID ) and ListContains("contacts.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 				<form action="addRemoveContact.cfm" method="post">
 					<input name="LibID" type="hidden" value="#SESSION.LibID#">
 					<cfif Contact.RecordCount gt 0>
