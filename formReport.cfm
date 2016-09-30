@@ -332,6 +332,8 @@
 			</div>
 		</form>
 	</cfoutput>
+	
+	<h3><a href="export.cfm">Export all data to Excel</a></h3>
 						<!--td>
 							Activity/course type<br>
 							<cfset Lookup = "ActivityType">
