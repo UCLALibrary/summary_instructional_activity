@@ -66,8 +66,9 @@
 						&nbsp;
 						<a href="sessDefs.html" target="_blank"><img src="images/help_icon.gif" alt="View definitions" border="0"></a>
 						</td>
+						<td><strong><a href="export.cfm">Export all data to Excel</a></strong></td>
 					</tr>
-					<tr><td><hr size="1"></td></tr>
+					<tr><td colspan="2"><hr size="1"></td></tr>
 				</table>
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
@@ -332,8 +333,7 @@
 			</div>
 		</form>
 	</cfoutput>
-	
-	<h3><a href="export.cfm">Export all data to Excel</a></h3>
+
 						<!--td>
 							Activity/course type<br>
 							<cfset Lookup = "ActivityType">
