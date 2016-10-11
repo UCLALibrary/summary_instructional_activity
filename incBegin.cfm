@@ -84,7 +84,7 @@
 											</cfif>
 										</cfcase>
 										<cfcase value="6">
-											<cfif ListContains("reports.cfm,selReport.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
+											<cfif ListContains("export.cfm,reports.cfm,selReport.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",")>
 												class="navLink1"
 											<cfelse>
 												class="navLink0"
@@ -102,7 +102,7 @@
 					<cfelse>
 						<cfoutput>
 							<td width="50%"
-								<cfif ListContains("reports.cfm,selReport.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
+								<cfif ListContains("export.cfm,reports.cfm,selReport.cfm", Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), ",")>
 									class="navLink1"
 								<cfelse>
 									class="navLink0"
