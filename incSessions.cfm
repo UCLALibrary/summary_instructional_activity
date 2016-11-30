@@ -15,7 +15,7 @@
 		else
 		{
 			sectionTitle = "Instructional Sessions Provided by " & Librarian.Librarian;
-			sortURL = APPLICATION.HostServer & SCRIPT_NAME & "?LibID=" & Librarian.LibrarianID & "&";
+			sortURL = APPLICATION.HostServer & SCRIPT_NAME & "?LibID=" & Librarian.LibrarianID & "&ShowAll=1&";
 		}
 	}
 	else if (sDT neq "" and eDT eq "")
@@ -149,6 +149,8 @@
 		</cfoutput>
 	</div>
 <cfelse>
+	<cfparam name="start" type="numeric" default="1">
+	<cfparam name="step" type="numeric" default="100">
 	<span class="dataSectionTitle"><cfoutput>#sectionTitle#</cfoutput></span>
 	<div class="data">
 		<cfoutput>
@@ -171,6 +173,51 @@
 				</form>
 			</cfif>
 		</cfoutput>
+		<cfif Find('sessions', SCRIPT_NAME)>
+			<cfoutput>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr valign="top">
+						<td colspan="5">&nbsp;</td>
+					</tr>
+					<tr valign="top">
+						<td>
+							<cfif (start-step-step) gt 1>
+								<a href="#sortURL#start=1">First</a>
+							<cfelse>
+								&nbsp;
+							</cfif>
+						</td>
+						<td>
+							<cfif start gt 1>
+								<a href="#sortURL#start=#start-step#">Previous</a>
+							<cfelse>
+								&nbsp;
+							</cfif>
+						</td>
+						<td>
+							<strong>#start# - #iif(start + step gt Sess.recordcount, Sess.recordcount,start + step-1)# of #Sess.recordcount# records</strong>
+						</td>
+						<td>
+							<cfif (start + step) lte Sess.recordcount>
+								<a href="#sortURL#start=#start+step#">Next</a>
+							<cfelse>
+								&nbsp;
+							</cfif>
+						</td>
+						<td>
+							<cfif (start+step+step) lte Sess.recordcount>
+								<a href="#sortURL#start=#Sess.recordcount-step+1#">Last</a>
+							<cfelse>
+								&nbsp;
+							</cfif>
+						</td>
+					</tr>
+					<tr valign="top">
+						<td colspan="5">&nbsp;</td>
+					</tr>
+				</table>
+			</cfoutput>
+		</cfif>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr valign="top">
 				<cfoutput>
@@ -199,7 +246,7 @@
 					</cfif>
 					<cfif not Find("mySIA", SCRIPT_NAME)>
 						<cfif not ListContains("contact.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") and DeptID eq 0>
-							<th nowrap><a href="#sortURL#fld=sp&ord=#ord#" class="columnHeading">Learner Academic Departments</a></th>
+							<th nowrap><a href="#sortURL#fld=sp&ord=#ord#" class="columnHeading">Department</a></th>
 						</cfif>
 						<cfif ListContains("activity.cfm,session.cfm,classroom.cfm,infoClassroom.cfm", Replace(Replace(SCRIPT_NAME, APPLICATION.Path, "", "all"), "sia",""), ",") or LibID eq 0>
 							<th nowrap><a href="#sortURL#fld=sl&ord=#ord#" class="columnHeading">Librarian(s)</a></th>
@@ -209,10 +256,11 @@
 				</cfoutput>
 			</tr>
 			<cfoutput>
-			  <cfset startDate = Now()> 
-			  <!-- started output at #TimeFormat(startDate, "HH:nn:ss")# -->
+			  <cfset startDate = Now()>
+			  <!-- started output at #TimeFormat(startDate, "HH:mm:ss")# -->
 			</cfoutput>
-			<cfoutput query="Sess" group="SessionID">
+			<cfloop query="Sess" startrow="#start#" endrow="#start + step-1#">
+			<cfoutput>
 				<cfset class="#IIF(Sess.CurrentRow eq 1, DE('first'), DE('rest'))#">
 				<cfscript>
 					SessID = Sess.SessionID;
@@ -231,15 +279,7 @@
 								( ( ( SESSION.UserLevelID eq 1 ) and ( ListContains(EditorID, SESSION.LibID, ",") ) ) or
 								  ( ( SESSION.UserLevelID eq 2 ) and ( Sess.UnitID eq SESSION.UID ) ) or
 								  ( SESSION.UserLevelID gte 3 ) )>
-								<a href="session.cfm?SessID=#Sess.SessionID#&ActID=#Sess.ActivityID#">
-									<cfif Sess.SessDeptTitle neq "">
-										#Sess.SessDeptTitle#
-										<cfif Sess.CourseNumber neq "">
-											(#Sess.CourseNumber#&nbsp;#Sess.CourseSection#)
-										</cfif>
-									<cfelse>#Sess.Title#
-									</cfif>
-								</a>
+								<a href="session.cfm?SessID=#Sess.SessionID#&ActID=#Sess.ActivityID#">#Sess.Title#</a>
 							<cfelse>
 								#Sess.Title#
 							</cfif>
@@ -383,9 +423,10 @@
 					</cfif>
 				</tr>
 			</cfoutput>
+			</cfloop>
         	<cfoutput>
-            	<cfset endDate = Now()> 
-            	<!-- ended output at #TimeFormat(endDate, "HH:nn:ss")# -->
+            	<cfset endDate = Now()>
+            	<!-- ended output at #TimeFormat(endDate, "HH:mm:ss")# -->
         	</cfoutput>
 		</table>
 		<cfoutput>
