@@ -18,7 +18,7 @@ OutID = 0;
 ClassID = 0;
 --->
 <cftry>
-	<cfstoredproc procedure="uspGetSession" datasource="#APPLICATION.dsn#">
+	<cfstoredproc procedure="uspGetSession" datasource="#APPLICATION.dsn#" cachedWithin="#CreateTimeSpan(0,0,2,0)#">
 		<cfif LibID neq 0 >
 			<cfprocparam type = "In" CFSQLType = "CF_SQL_INTEGER" dbvarname="@LibID" value="#LibID#" null="no">
 		<cfelse>
