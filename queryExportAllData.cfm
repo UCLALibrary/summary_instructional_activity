@@ -25,6 +25,10 @@ select
 		else '"' + coalesce(dbo.get_faculty_by_session(s.SessionID), 'N/A') + '"'
 	end AS FacContacts,
 	case
+		when LEN('"' + coalesce(dbo.get_fac_email_by_session(s.SessionID), 'N/A') + '"') = 2 then 'N/A'
+		else '"' + coalesce(dbo.get_fac_email_by_session(s.SessionID), 'N/A') + '"'
+	end AS FacEmails,
+	case
 		when LEN('"' + coalesce(dbo.build_initiatives(s.SessionID), 'N/A') + '"') = 2 then 'N/A'
 		else '"' + coalesce(dbo.build_initiatives(s.SessionID), 'N/A') + '"'
 	end AS Initiatives

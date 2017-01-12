@@ -56,6 +56,7 @@ while 2016-07-01 to 2016-07-01 will get data for July 1 2016 only.</p>
 				<th>Presenters</th>
 				<th>PresenterUnits</th>
 				<th>FacContacts</th>
+				<th>FacEmails</th>
 				<th>Initiatives</th>
 			</tr>
 		<cfloop query="qryExportAllData">
@@ -77,6 +78,7 @@ while 2016-07-01 to 2016-07-01 will get data for July 1 2016 only.</p>
 				<td>#Presenters#</td>
 				<td>#PresenterUnits#</td>
 				<td>#FacContacts#</td>
+				<td>#FacEmails#</td>
 				<td>#Initiatives#</td>
 			</tr>
 		</cfloop>
