@@ -140,8 +140,28 @@
 									<cfinclude template="incBegin.cfm">
 									<cfinclude template="incError.cfm">
 								<cfelse>
-									<cfinclude template="formDeleteSession.cfm">
-									<cfinclude template="incSession.cfm">
+									<cfscript>
+										//initialize vars for uspGetPresenters proc
+										SessID = SessID;
+									</cfscript>
+									<cfinclude template="uspGetPresenters.cfm">
+									<cfif not up2snuff>
+										<cfinclude template="incBegin.cfm">
+										<cfinclude template="incError.cfm">
+									<cfelse>
+										<cfscript>
+											//initialize vars for uspGetDevelopers proc
+											ActID = ActID;
+										</cfscript>
+										<cfinclude template="uspGetDevelopers.cfm">
+										<cfif not up2snuff>
+											<cfinclude template="incBegin.cfm">
+											<cfinclude template="incError.cfm">
+										<cfelse>
+											<cfinclude template="formDeleteSession.cfm">
+											<cfinclude template="incSession.cfm">
+										</cfif>
+									</cfif>
 								</cfif>
 							</cfif>
 						</cfif>
